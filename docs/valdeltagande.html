@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Valdeltagande – Luleå historiska val</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+body{margin:0;background:#f4f6f8;color:#192536;font:16px system-ui,sans-serif}
+header,aside{background:#fff;padding:16px 22px}header{border-bottom:1px solid #d4dfe6}
+h1{font-size:1.5rem;margin:8px 0}p{line-height:1.5}
+nav a{margin-right:15px;color:#005d8e}
+main{display:grid;grid-template-columns:270px 1fr;min-height:75vh}
+aside{border-right:1px solid #d4dfe6}
+label{display:block;margin:16px 0 6px;font-weight:650}
+select,button{box-sizing:border-box;width:100%;padding:10px;border:1px solid #9baebc;border-radius:5px;background:#fff}
+button{margin-top:18px;cursor:pointer}
+#map{height:78vh;min-height:480px}
+small,#info{color:#506276;font-size:.84rem}
+#status{font-weight:600}
+@media(max-width:720px){main{display:flex;flex-direction:column}#map{height:65vh}}
+</style></head><body data-mode="turnout">
+<header><nav><a href="index.html">Valdistriktskarta</a><a href="valdeltagande.html">Valdeltagande</a><a href="ogiltiga-roster.html">Ogiltiga röster</a></nav>
+<h1>Valdeltagande – Luleå kommun</h1><p>Kartans färg visar valdeltagande i procent (VDT dividerat med röstberättigade). Klicka för att se grundvärden.</p></header>
+<main><aside>
+<label for="year">Valår</label><select id="year"></select>
+<label for="vote">Valtyp</label><select id="vote"><option value="RS">Riksdagsval</option><option value="KF">Kommunfullmäktigeval</option></select>
+<label for="district">Valdistrikt</label><select id="district"><option>Alla valdistrikt</option></select>
+<button id="reset">Visa hela Luleå</button>
+<p id="status">Läser data …</p><p id="info"></p>
+<small>Datakälla: uppladdad Excel, flik ”Röstdata v3”, tabell ”röstdata”. Historiska kartgränser före 2006 kan vara rekonstruerade. Saknade uppgifter visas inte som noll.</small>
+</aside><div id="map" aria-label="Tematisk karta över valdeltagande i Luleå"></div></main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="rostdata-karta.js"></script>
+</body></html>
