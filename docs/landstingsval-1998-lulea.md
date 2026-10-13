@@ -23,3 +23,11 @@ För 1998 års landstingsval gäller:
 Valdistriktsmedlemskap byggs från varje distrikt i källtabellen och kan skilja sig från kommunvalets och riksdagsvalets valkretsindelningar.
 
 Inga individuella röster eller distriktsgränser för 1998 har ännu importerats.
+
+## Poströster som inte räknades i vallokal
+
+SCB:s originalrapport (Allmänna valen 1998, del 2, s. 5 och tabell 3 s. 278) förklarar att merparten av poströsterna redan ingår i valdistriktsresultaten, medan övriga poströster ingår på kommunnivå. De utgörs enligt SCB huvudsakligen av röster avgivna under valsöndagen. Uppgiften visar **inte** att samtliga har avgetts i en annan kommun.
+
+För Luleå 2580 är skillnaden mellan kommuntotal och summan av 56 valdistrikt exakt 304 röstande och 290 giltiga valsedlar. Fördelningen av de 290 giltiga rösterna: m 51, c 11, fp 21, kd 16, mp 17, s 90, v 60, övriga 24. Summan är 290.
+
+**Redovisningsregel:** Behåll kategorin `i_vallokal_ej_raknade_postroster` som en separat kommunövergripande restpost utan valdistriktsgeometri. Addera inte den till något enskilt valdistrikt. Hela kommunens röster = summan av distriktens lokalt räknade röster + denna restpost. Undvik den obestyrkta etiketten `röster avgivna i andra kommuner`.
