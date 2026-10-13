@@ -80,10 +80,28 @@ const rateColor=(n,min,max)=>{
  const hue=120*(1-t);return 'hsl('+hue+',72%,43%)';
 };
 const printable=r=>{
- if(!r)return '<p>Inga säkert matchade röstdata för valdistriktet.</p>';
- if(voteMode==='turnout')return '<p><b>Valdeltagande: '+(voteValue(r)===null?'Saknas':nf.format(voteValue(r))+' %')+'</b></p><p>VDT, röstande: '+nf.format(r.VDT)+'</p><p>Röstberättigade: '+(r['Röstberättigade']===null?'Saknas':nf.format(r['Röstberättigade']))+'</p>';
- return '<p><b>Ogiltiga valsedlar: '+(r['med ogiltiga valsedlar']===null?'Saknas':nf.format(r['med ogiltiga valsedlar']))+'</b></p>'+
- invalidFields.map((k,i)=>'<p>'+['OG varav blanka','OG varav ÖVR ogiltiga','OG varav EGEJ, ej anmälda partier'][i]+': '+(r[k]===null?'Saknas':nf.format(r[k]))+'</p>').join('');
+ const quantity=(value)=>value===null||!Number.isFinite(value)?'Saknas':nf.format(value);
+ const percent=(value)=>value===null||!Number.isFinite(value)?'Saknas':nf.format(value)+' %';
+ if(!r)return '<p><strong>Antal: Saknas</strong></p><p><strong>Andel: Saknas</strong></p><p>Inga säkert matchade röstdata för valdistriktet.</p>';
+ if(voteMode==='turnout'){
+  const number=asNumber(r,'VDT');
+  const eligible=asNumber(r,'Röstberättigade');
+  const rate=number!==null&&eligible>0?100*number/eligible:null;
+  return '<p><strong>Valdeltagande – antal: '+quantity(number)+'</strong></p>'+
+   '<p><strong>Valdeltagande – andel: '+percent(rate)+'</strong></p>'+
+   '<p>Röstberättigade: '+quantity(eligible)+'</p>'+
+   '<p>Beräkning: VDT / röstberättigade × 100.</p>';
+ }
+ const field=document.getElementById('metric').value;
+ const number=asNumber(r,field),vdt=asNumber(r,'VDT');
+ const rate=number!==null&&vdt>0?100*number/vdt:null;
+ const label=document.getElementById('metric').selectedOptions[0]?.textContent||'Ogiltiga röster';
+ return '<p><strong>'+label+' – antal: '+quantity(number)+'</strong></p>'+
+  '<p><strong>'+label+' – andel: '+percent(rate)+'</strong></p>'+
+  '<p>Antal röstande (VDT): '+quantity(vdt)+'</p>'+
+  '<p>Totalt ogiltiga valsedlar: '+quantity(asNumber(r,'med ogiltiga valsedlar'))+'</p>'+
+  '<p>Beräkning: antal i vald kategori / VDT × 100.</p>'+
+  invalidFields.map((k,i)=>'<p>'+['OG varav blanka','OG varav ÖVR ogiltiga','OG varav EGEJ, ej anmälda partier'][i]+': '+quantity(asNumber(r,k))+'</p>').join('');
 };
 function repaintVotes(){
  if(!currentLayer)return;
