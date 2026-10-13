@@ -23,6 +23,8 @@ jobs:
           python-version: '3.12'
       - name: Check historical 1998 landsting vote totals
         run: python scripts/validate_landsting_1998.py data/valresultat/1998/landsting_lulea_2580_utdrag_preliminart.csv
+      - name: Check full 1998 municipality and postal reconciliation
+        run: python scripts/validate_landsting_1998_complete.py data/valresultat/1998/landsting_lulea_2580_utdrag_preliminart.csv
       - name: Check 2580 and provenance metadata
         run: python scripts/validate_lulea_scope.py data/valresultat/1998/landsting_lulea_2580_utdrag_preliminart.csv
       - name: Check reconstructed 2002 district metadata
