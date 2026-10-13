@@ -26,3 +26,9 @@ Licens för källdata ska granskas före vidare återpublicering.
 
 ## Geografisk avgränsning
 Historisk valstatistik importeras **endast för Luleå kommun (2580)**. Samtliga relevanta originalkolumner och distriktsrader bevaras; kommun-/valkretstotaler särredovisas för att undvika dubbelräkning. Se [importpolicy](docs/importpolicy-lulea-2580.md) och [kontroll av kommunkod](scripts/validate_lulea_scope.py). Original-PDF:erna har ännu inte fullständigt transkriberats.
+
+## Valdistriktsgeometrier 2006, 2010, 2014, 2018, 2022 och 2026
+
+Det aktiva geografispåret är nu **endast Luleå kommun 2580** för de sex valåren. [Källregister, CRS-metod och status](docs/valdistrikt-geometrier-2006-2026.md) dokumenterar Valmyndighetens originalarkiv. [Importskript](scripts/import_historiska_valdistrikt.py) och [GitHub Actions-import](.github/workflows/import-historical-district-geometries.yml) är upplagda. Varje år kan startas via Actions → Import historical district geometries → Run workflow → välj år.
+
+**Status:** Källorna är lokaliserade och importvägen är implementerad, men sex årgångar är **ännu inte importerade och validerade i detta repo**. Resultatfiler skapas först vid lyckad hämtning och kontrollerad konvertering av respektive original. 2018/2022/2026 har dokumenterad käll-CRS EPSG:3006; andra år verifieras via PRJ innan användning. 2002-lagret är fortsatt en rekonstruktion, inte originaldata för 2006.
