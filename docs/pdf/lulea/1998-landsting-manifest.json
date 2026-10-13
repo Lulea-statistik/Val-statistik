@@ -1,0 +1,20 @@
+{
+  "year": 1998,
+  "valtyp": "region",
+  "kommunkod": "2580",
+  "source": "SCB Allmänna valen 1998 del 2 tabell 3",
+  "source_pdf_pages_1_based": [
+    278,
+    279,
+    280
+  ],
+  "printed_pages": [
+    276,
+    277,
+    278
+  ],
+  "source_sha256": "4c1b6f780aee1ff6ff2f7a5262af5b6bc0599f3f76a999c1944af8c97c96f5d7",
+  "excerpt_sha256": "bf59864289b0a16bab5338c735ad228e8878b7245fab74ab48f0573f737363de",
+  "excerpt_location": "Created locally; not yet stored as binary in GitHub",
+  "transcription_status": "21 districts, still incomplete"
+}
