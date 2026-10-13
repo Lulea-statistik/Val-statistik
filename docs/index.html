@@ -3,12 +3,12 @@
 <title>Valdistrikt i Luleå 2002 | Val-statistik</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>body{margin:0;font:16px system-ui,sans-serif;color:#172333;background:#f4f6f8}header{padding:16px 24px;background:#fff;border-bottom:1px solid #dce3eb}h1{font-size:1.6rem;margin:0 0 8px}p{margin:4px 0;line-height:1.5}.layout{display:grid;grid-template-columns:minmax(230px,300px) 1fr;min-height:75vh}aside{padding:20px;background:#fff}#map{min-height:75vh}label{display:block;margin:15px 0 6px;font-weight:600}select,button{width:100%;padding:10px;border:1px solid #a8b7c5;border-radius:5px;background:white}button{margin-top:16px;cursor:pointer}.note{font-size:.87rem;color:#4b5a69;margin-top:22px}footer{padding:14px 20px;font-size:.85rem}a{color:#005999}@media(max-width:720px){.layout{display:flex;flex-direction:column}#map{height:62vh;min-height:450px}}</style></head>
-<body><header><h1>Valdistrikt i Luleå</h1><p>Historisk valdistriktskarta – rekonstruktion av indelningen år 2002</p></header>
+<body><header><h1>Valdistrikt i Luleå</h1><p>Historiska valdistriktsgränser för Luleå kommun, 2002–2026</p></header>
 <div class="layout"><aside><label for="year">Valår</label><select id="year"><option value="2002">2002</option></select>
 <label for="election">Valtyp</label><select id="election"><option value="riksdag">Riksdagsval</option><option value="region">Landstings-/regionval</option><option value="kommun">Kommunfullmäktigeval</option></select>
 <label for="district">Valdistrikt</label><select id="district"><option value="">Alla valdistrikt</option></select>
 <button id="reset">Visa hela Luleå</button><p id="count"></p><p id="selection"></p>
-<p class="note"><strong>Om kartan:</strong> Gränserna från 2002 är rekonstruerade från officiellt GIS-material från 2006 och jämförda med kartbilder från 2002. De är inte certifierade originalgränser. Valtypsväljaren förbereder framtida valresultat; tills vidare visas samma valdistriktsgränser oavsett valtyp. <a href="valdistrikt-2002-metod.md">Metod</a>.</p></aside><main id="map" aria-label="Karta över Luleås valdistrikt"></main></div>
+<p class="note"><strong>Om kartan:</strong> Gränserna 2006–2026 bygger på Valmyndighetens originalgeometrier. År 2002 är rekonstruerat och är inte certifierad originalgeometri. Årgångar kan skilja sig i hur vatten och kustområden avgränsas. Valtypsväljaren förbereder framtida valresultat; tills vidare visas samma valdistriktsgränser oavsett valtyp. <a href="valdistrikt-2002-metod.md">Metod</a>.</p></aside><main id="map" aria-label="Karta över Luleås valdistrikt"></main></div>
 <footer>Källa: Valmyndigheten. <a href="https://github.com/Lulea-statistik/Val-statistik">GitHub & metodinformation</a>.</footer><section style="padding:20px 24px;max-width:1100px;margin:auto;background:#fff"><h2>Historisk granskning 1970–2026</h2><p>Projektet dokumenterar valdistrikt och valkretsar separat för riksdagsval, landstings-/regionval och kommunfullmäktigeval. <strong>Under arbete:</strong> 51 kombinationer av valår och valtyp finns i arbetsregistret, men källkontroll återstår för flertalet år.</p><p><strong>SCB 1998:</strong> Luleå kommun redovisas i femte landstingsvalkretsen. Kommunens total är 55 724 röstberättigade, 44 742 röstande och 43 817 giltiga valsedlar. För 2002 innehåller kartan två <em>kommunala</em> valkretsar. Dessa är olika valtyper och indelningarna ska inte sammanblandas.</p><p><a href="historisk-valkretsinventering.md">Metod och status</a> · <a href="https://github.com/Lulea-statistik/Val-statistik/blob/main/data/kallor/publikationsinventering_1970_2026.csv">Publikationsinventering (GitHub)</a> · <a href="landstingsval-1998-lulea.md">1998 års landstingsval</a></p></section>
 <section style="padding:24px;max-width:1100px;margin:auto"><h2>SCB-källor för historiska val</h2><p>Källregistret innehåller åtta tabeller. Perioderna och den geografiska upplösningen skiljer sig åt. Länkarna visar SCB:s originaltabeller; statistikvärdena är ännu inte importerade till webbplatsen.</p><div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;background:#fff"><thead><tr><th style="text-align:left;padding:10px">SCB-tabell</th><th style="text-align:left;padding:10px">Statistik</th><th style="padding:10px">Valår</th></tr></thead><tbody>
 <tr><td style="padding:10px"><a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__ME__ME0104__ME0104A/Kfmandat/">Kfmandat</a></td><td>Kommunfullmäktige – mandat</td><td>1973–2022</td></tr>
@@ -27,65 +27,76 @@
 <script>
 const map=L.map('map',{preferCanvas:true}).setView([65.59,22.15],10);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);
-const dataUrl='data/lulea_valdistrikt_2002.geojson';
-let layer,allBounds,selected=null;const selector=document.getElementById('district');
-const props=f=>f.properties||{};const code=f=>String(props(f).valdistriktskod||'');
-function style(f){return {color:code(f)===selected?'#222':'#a52635',weight:code(f)===selected?4:1.5,fillColor:props(f).kommunvalkrets_kod==='01'?'#d5a329':'#c64650',fillOpacity:code(f)===selected?.7:.32};}
-function choose(v){selected=v||null;layer.setStyle(style);if(selected){let found;layer.eachLayer(l=>{if(code(l.feature)===selected)found=l});if(found){map.fitBounds(found.getBounds(),{padding:[25,25]});found.openPopup()}}else map.fitBounds(allBounds,{padding:[20,20]});}
-fetch(dataUrl).then(r=>{if(!r.ok)throw Error('HTTP '+r.status);return r.json()}).then(data=>{
-if(!Array.isArray(data.features)||data.features.length!==56)throw Error('Oväntat antal valdistrikt');
-data.features.sort((a,b)=>(props(a).valdistriktsnamn||'').localeCompare(props(b).valdistriktsnamn||'','sv'));
-for(const f of data.features){const o=document.createElement('option');o.value=code(f);o.textContent=props(f).valdistriktsnamn+' ('+code(f)+')';selector.appendChild(o)}
-layer=L.geoJSON(data,{style,onEachFeature:(f,l)=>{l.bindPopup('<strong>'+props(f).valdistriktsnamn+'</strong><p>Kod: '+code(f)+'</p><p>'+props(f).kommunvalkrets_namn+'</p>');l.on('click',()=>{selector.value=code(f);choose(code(f))})}}).addTo(map);
-allBounds=layer.getBounds();map.fitBounds(allBounds,{padding:[20,20]});document.getElementById('count').textContent=data.features.length+' valdistrikt – 29 Norra och 27 Södra valkretsen';
-selector.addEventListener('change',()=>choose(selector.value));document.getElementById('reset').addEventListener('click',()=>{selector.value='';choose('')});
-}).catch(err=>{document.getElementById('count').textContent='Kunde inte läsa geografiska data: '+err.message});
-const yearControl=document.getElementById('year');
-const vintages={2006:'data/valdistrikt/2006/lulea_2580_valdistrikt_2006_epsg4326.geojson',2010:'data/valdistrikt/2010/lulea_2580_valdistrikt_2010_epsg4326.geojson',2014:'data/valdistrikt/2014/lulea_2580_valdistrikt_2014_epsg4326.geojson',2022:'data/valdistrikt/2022/lulea_2580_valdistrikt_2022_epsg4326.geojson',2026:'data/valdistrikt/2026/lulea_2580_valdistrikt_2026_epsg4326.geojson',2018:'data/valdistrikt/2018/lulea_2580_valdistrikt_2018_epsg4326.geojson'};
-for(const [year,url] of Object.entries(vintages)){
-  fetch(url).then(r=>r.ok?r.json():null).then(data=>{
-    if(!data||!Array.isArray(data.features)||!data.features.length)return;
-    const valid=data.features.every(f=>{const p=f.properties||{};const municipal=String(p.kommunkod??p.Kommunkod??p.KOM??'');const id=String(p.valdistriktskod??p.Valdistriktskod??p.VD??p.Lkfv??p.LKFV??'');return municipal?municipal==='2580':/^2580[0-9]{4}$/.test(id)});
-    if(!valid)return;
-    const opt=document.createElement('option');
-    opt.value=year;opt.textContent=year;
-    yearControl.appendChild(opt);
-  }).catch(()=>{});
+const sources={
+  2002:'data/lulea_valdistrikt_2002.geojson',
+  2006:'data/valdistrikt/2006/lulea_2580_valdistrikt_2006_epsg4326.geojson',
+  2010:'data/valdistrikt/2010/lulea_2580_valdistrikt_2010_epsg4326.geojson',
+  2014:'data/valdistrikt/2014/lulea_2580_valdistrikt_2014_epsg4326.geojson',
+  2018:'data/valdistrikt/2018/lulea_2580_valdistrikt_2018_epsg4326.geojson',
+  2022:'data/valdistrikt/2022/lulea_2580_valdistrikt_2022_epsg4326.geojson',
+  2026:'data/valdistrikt/2026/lulea_2580_valdistrikt_2026_epsg4326.geojson'
+};
+const yearSelect=document.getElementById('year'),districtSelect=document.getElementById('district');
+const countEl=document.getElementById('count'),statusEl=document.getElementById('selection');
+let currentLayer=null,currentBounds=null,loadedYear=null,loadSequence=0;
+const p=f=>f.properties||{};
+const districtCode=f=>String(p(f).valdistriktskod??p(f).Valdistriktskod??p(f).VD??p(f).Lkfv??p(f).LKFV??'').trim();
+const districtName=f=>String(p(f).valdistriktsnamn??p(f).Valdistriktsnamn??p(f).VD_NAMN??p(f).Vdnamn??p(f).VDNAMN??p(f).NAMN??'Namnlöst valdistrikt');
+const isLulea=f=>{
+ const props=p(f),municipality=String(props.kommunkod??props.Kommunkod??props.KOM??'').trim();
+ return municipality?municipality==='2580':/^2580[0-9]{4}$/.test(districtCode(f));
+};
+function chooseDistrict(code){
+ if(!currentLayer)return;
+ let match=null;
+ currentLayer.eachLayer(l=>{
+   const chosen=!!code&&districtCode(l.feature)===code;
+   l.setStyle({color:chosen?'#222':'#a52635',weight:chosen?3:1.5,fillColor:'#c64650',fillOpacity:chosen?.65:.3});
+   if(chosen)match=l;
+ });
+ if(match){map.fitBounds(match.getBounds(),{padding:[24,24]});match.openPopup()}
+ else if(currentBounds?.isValid()){map.closePopup();map.fitBounds(currentBounds,{padding:[20,20]})}
 }
-yearControl.addEventListener('change',async()=>{
- const year=yearControl.value;
- const url=year==='2002'?dataUrl:vintages[year];
- if(!url)return;
+async function readYear(year){
+ const response=await fetch(sources[year]);
+ if(!response.ok)throw Error('HTTP '+response.status);
+ const data=await response.json();
+ if(data.type!=='FeatureCollection'||!Array.isArray(data.features)||!data.features.length)
+   throw Error('Saknar geometrier');
+ if(!data.features.every(isLulea))throw Error('Årgången innehåller objekt utanför Luleå (2580)');
+ const seen=new Set();
+ for(const f of data.features){
+   if(!f.geometry||!districtCode(f)||seen.has(districtCode(f)))throw Error('Ogiltiga eller duplicerade distriktskoder');
+   seen.add(districtCode(f));
+ }
+ return data;
+}
+async function loadYear(year){
+ const requestId=++loadSequence;
+ countEl.textContent='Läser valdistrikt för '+year+' …';
  try{
-  const response=await fetch(url);if(!response.ok)throw Error('HTTP '+response.status);
-  const data=await response.json();
-  if(!Array.isArray(data.features)||!data.features.length)throw Error('Inga geometrier');
-  const isLulea=f=>{const p=props(f),municipality=String(p.kommunkod??p.Kommunkod??p.KOM??'').trim();const id=String(p.valdistriktskod??p.Valdistriktskod??p.VD??p.Lkfv??p.LKFV??'');return municipality ? municipality==='2580' : /^2580[0-9]{4}$/.test(id)};
-  data.features=data.features.filter(isLulea);
-  if(!data.features.length)throw Error('Filen saknar verifierbara Luleådistrikt (2580)');
-  if(layer)map.removeLayer(layer);
-  selector.replaceChildren(new Option('Alla valdistrikt',''));
-  data.features.sort((a,b)=>String(props(a).valdistriktsnamn||props(a).Valdistriktsnamn||props(a).VD_NAMN||props(a).Vdnamn||props(a).VDNAMN||props(a).NAMN||'').localeCompare(String(props(b).valdistriktsnamn||props(b).Valdistriktsnamn||props(b).VD_NAMN||props(b).Vdnamn||props(b).VDNAMN||props(b).NAMN||''),'sv'));
-  for(const feature of data.features){
-   const opt=document.createElement('option');
-   opt.value=String(props(feature).valdistriktskod||props(feature).Valdistriktskod||props(feature).VD||props(feature).Lkfv||props(feature).LKFV||'');
-   opt.textContent=String(props(feature).valdistriktsnamn||props(feature).Valdistriktsnamn||props(feature).VD_NAMN||props(feature).Vdnamn||props(feature).VDNAMN||props(feature).NAMN||'')+' ('+opt.value+')';
-   selector.appendChild(opt);
-  }
-  selected=null;
-  const districtCode=f=>String(props(f).valdistriktskod||props(f).Valdistriktskod||props(f).VD||props(f).Lkfv||props(f).LKFV||'');
-  layer=L.geoJSON(data,{style:f=>({color:'#a52635',weight:1.4,fillColor:'#c64650',fillOpacity:.32}),onEachFeature:(f,l)=>{
-    l.bindPopup('<strong>'+String(props(f).valdistriktsnamn||props(f).Valdistriktsnamn||props(f).VD_NAMN||props(f).Vdnamn||props(f).VDNAMN||props(f).NAMN||'')+'</strong><p>Valdistrikt: '+districtCode(f)+'</p><p>Valår: '+year+'</p>');
-    l.on('click',()=>{selector.value=districtCode(f);map.fitBounds(l.getBounds());l.openPopup()});
-  }}).addTo(map);
-  allBounds=layer.getBounds();map.fitBounds(allBounds,{padding:[20,20]});
-  document.getElementById('count').textContent=data.features.length+' valdistrikt ('+year+')';
-  document.getElementById('selection').textContent=year==='2002'?'Rekonstruerade gränser':'Valmyndighetens originalgeometrier';
-  selector.onchange=()=>{
-    const chosen=selector.value;
-    if(!chosen){map.fitBounds(allBounds);return;}
-    layer.eachLayer(l=>{if(districtCode(l.feature)===chosen){map.fitBounds(l.getBounds());l.openPopup();}});
-  };
- }catch(e){document.getElementById('count').textContent='Årgången kunde inte laddas: '+e.message;}
-});
+  const data=await readYear(year);
+  if(requestId!==loadSequence)return;
+  const nextLayer=L.geoJSON(data,{style:()=>({color:'#a52635',weight:1.5,fillColor:'#c64650',fillOpacity:.3}),
+   onEachFeature:(feature,l)=>{
+     l.bindPopup('<strong>'+districtName(feature).replaceAll('&','&amp;').replaceAll('<','&lt;')+'</strong><p>Valdistrikt: '+districtCode(feature)+'</p><p>Valår: '+year+'</p>');
+     l.on('click',()=>{districtSelect.value=districtCode(feature);chooseDistrict(districtSelect.value)});
+   }
+  });
+  if(currentLayer)map.removeLayer(currentLayer);
+  currentLayer=nextLayer.addTo(map);
+  currentBounds=currentLayer.getBounds();
+  loadedYear=year;
+  const options=data.features.slice().sort((a,b)=>districtName(a).localeCompare(districtName(b),'sv')).map(f=>new Option(districtName(f)+' ('+districtCode(f)+')',districtCode(f)));
+  districtSelect.replaceChildren(new Option('Alla valdistrikt',''),...options);
+  countEl.textContent=data.features.length+' valdistrikt ('+year+')';
+  statusEl.textContent=year==='2002'?'Rekonstruerade gränser – ej officiell originalgeometri':'Valmyndighetens originalgeometrier – endast Luleå';
+  if(currentBounds.isValid())map.fitBounds(currentBounds,{padding:[20,20]});
+ }catch(e){if(requestId===loadSequence){countEl.textContent='Kunde inte läsa '+year+': '+e.message;yearSelect.value=loadedYear||'2002'}}
+}
+districtSelect.addEventListener('change',()=>chooseDistrict(districtSelect.value));
+document.getElementById('reset').addEventListener('click',()=>{districtSelect.value='';chooseDistrict('')});
+yearSelect.replaceChildren(...Object.keys(sources).map(y=>new Option(y,y)));
+yearSelect.addEventListener('change',()=>loadYear(yearSelect.value));
+loadYear('2002');
 </script></body></html>
