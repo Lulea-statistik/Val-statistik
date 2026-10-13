@@ -58,3 +58,13 @@ Användaren laddade upp `valgeografi_valdistrikt.zip` från Valmyndighetens 2014
 - GeoJSON, QA-metadata och jämförelsefil har skapats lokalt. GitHub Actions-flödet är ändrat för att försöka importera 2014 via Valmyndighetens direktarkiv, men **GitHub-publiceringen är ännu inte bekräftad**.
 
 **Notera:** 2014-arkivet har **inte** fältet `KOM`, så parsning av kommun 2580 ska ske via koden `VD`. Detta skiljer sig från Valmyndighetens 2018-arkiv där `KOM` finns.
+
+## 2010 års uppladdade originalarkiv (13 oktober 2026)
+
+Användarens `alla_valdistrikt.zip` innehåller `alla_valdistrikt.shp`, `.shx`, `.dbf`, `.prj` och ESRI-metadata. Källmetadata i `.shp.xml` innehåller skapandedatum 2010-03-08. Schemat är **`LKFV`** (åttasiffrig distriktskod) och **`VDNAMN`** (namn), vilket skiljer sig från 2014 års `VD`/`VD_NAMN` och 2018 års `KOM`/`VD`. Filens PRJ anger **SWEREF 99 TM, EPSG:3006**. Kommunurval sker endast med verifierat `LKFV`-prefix `2580`.
+
+Resultat: 5 668 polygonposter totalt i arkivet, **42 unika Luleådistrikt**, samtliga giltiga, 0 m² parvisa överlapp och total polygonarea **3 478,91665 km²**. GeoJSON EPSG:4326 och maskinläsbar kontrollrapport har producerats lokalt, men GitHub-publiceringen återstår att verifiera.
+
+Jämförelse 2010–2014: alla 42 koder från 2010 finns i 2014 års datamängd som har 44 koder (2 tillkommande). De gemensamma kodernas sammanlagda symmetriska ytskillnad är cirka **2 020 km²**, och polygonernas samlade yta har ökat cirka **470 km²**. Detta är mycket stora skillnader jämfört med 2014–2018, och får **inte** automatiskt tolkas som faktiska förändringar i valdistrikt. Källa/metod/geografisk täckning, särskilt kustområden och havsyta, behöver kontrolleras innan jämförelsekartan får klassificera dessa förändringar.
+
+`import_historiska_valdistrikt.py` har uppdaterats att känna igen fältnamnet `LKFV`. Importlänk och ZIP-hämtning från Valmyndigheten i GitHub Actions har ännu inte bekräftats; **2026-10-13 är inte GitHub-publicering av 2010-data bekräftad**.
