@@ -10,6 +10,16 @@
 <button id="reset">Visa hela Luleå</button><p id="count"></p><p id="selection"></p>
 <p class="note"><strong>Om kartan:</strong> Gränserna från 2002 är rekonstruerade från officiellt GIS-material från 2006 och jämförda med kartbilder från 2002. De är inte certifierade originalgränser. Valtypsväljaren förbereder framtida valresultat; tills vidare visas samma valdistriktsgränser oavsett valtyp. <a href="docs/valdistrikt-2002-metod.md">Metod</a>.</p></aside><main id="map" aria-label="Karta över Luleås valdistrikt"></main></div>
 <footer>Källa: Valmyndigheten. <a href="https://github.com/Lulea-statistik/Val-statistik">GitHub & metodinformation</a>.</footer>
+<section style="padding:24px;max-width:1100px;margin:auto"><h2>SCB-källor för historiska val</h2><p>Källregistret innehåller åtta tabeller. Perioderna och den geografiska upplösningen skiljer sig åt. Länkarna visar SCB:s originaltabeller; statistikvärdena är ännu inte importerade till webbplatsen.</p><div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;background:#fff"><thead><tr><th style="text-align:left;padding:10px">SCB-tabell</th><th style="text-align:left;padding:10px">Statistik</th><th style="padding:10px">Valår</th></tr></thead><tbody>
+<tr><td style="padding:10px"><a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__ME__ME0104__ME0104A/Kfmandat/">Kfmandat</a></td><td>Kommunfullmäktige – mandat</td><td>1973–2022</td></tr>
+<tr><td style="padding:10px"><a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__ME__ME0104__ME0104A/Kommunmed/">Kommunmed</a></td><td>Kommunfullmäktige – röstberättigade efter medborgarskap</td><td>1973–2022</td></tr>
+<tr><td style="padding:10px"><a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__ME__ME0104__ME0104A/ME0104T25/">ME0104T25</a></td><td>Kommunfullmäktige – personröster</td><td>2002–2022</td></tr>
+<tr><td style="padding:10px"><a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__ME__ME0104__ME0104A/ME0104T1/">ME0104T1</a></td><td>Kommunfullmäktige – valresultat</td><td>1973–2022</td></tr>
+<tr><td style="padding:10px"><a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__ME__ME0104__ME0104A/ME0104T9/">ME0104T9</a></td><td>Kommunfullmäktige – medborgarskapsland och kön (riket)</td><td>2002–2022</td></tr>
+<tr><td style="padding:10px"><a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__ME__ME0104__ME0104A/ME0104T6/">ME0104T6</a></td><td>Kommunfullmäktige – medborgarskap och kön per kommun</td><td>2002–2018</td></tr>
+<tr><td style="padding:10px"><a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__ME__ME0104__ME0104B/Ltmandat/">Ltmandat</a></td><td>Landsting/region – mandat</td><td>1973–2022</td></tr>
+<tr><td style="padding:10px"><a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__ME__ME0104__ME0104C/Riksdagsmandat/">Riksdagsmandat</a></td><td>Riksdag – mandat</td><td>1973–2022</td></tr>
+</tbody></table></div><p><a href="docs/scb-kallregister.md">Källdokumentation och metodbegränsningar</a></p></section>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 const map=L.map('map',{preferCanvas:true}).setView([65.59,22.15],10);
