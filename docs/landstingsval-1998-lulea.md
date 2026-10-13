@@ -9,7 +9,7 @@ Källa: https://share.scb.se/ov9993/data/historisk%20statistik/SOS%201911-%2FVal
 
 ## Luleås distriktsnamn i detta dokument
 Tabellen på sidorna 277–278 omfattar bland andra:
-Avvik, Antnäs, Avan, Bensbyn, Bergnäsets 1–3, Björkskatans 1–2, Brändön, Bälinge, Ersnäs, Gammelstad, Hertsön 1, Hertsön 3–4, Jämtön, Klöverträsk, Lerbäcken, Luleå 1–11, Luleå 13–22, Mjäl? [ej fastställt], Melderstein, Måttsund, Niemisel, Porsön 1–3, Rutvik, Råneå 1–2, Stadsön 1–3, Sunderbyns 1–2 och Vittå.
+Avvik, Antnäs, Avan, Bensbyn, Bergnäsets 1–3, Björkskatans 1–2, Brändön, Bälinge, Ersnäs, Gammelstad, Hertsön 1, Hertsön 3–4, Jämtön, Klöverträsk, Lerbäcken, Luleå 1–11, Luleå 13–22, Melderstein, Måttsund, Niemisel, Porsön 1–3, Rutvik, Råneå 1–2, Stadsön 1–3, Sunderbyns 1–2 och Vittå.
 
 *Förteckningen ovan är en partiell transkription för orientering, inte en verifierad komplett distriktslista.* Kontrollera originaltabellen före inläsning av fullständigt distriktsregister.
 
