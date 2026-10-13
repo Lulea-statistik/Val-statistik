@@ -6,21 +6,21 @@ valar,valtyp,kommunkod,kalla_id,tryckt_sida,tabell,radtyp,original_radnummer,val
 1998,region,2580,SCB_SOS_1998_D2,276,3,valdistrikt,5,5:e valkretsen,Bergnäsets 1,591,3,496,"83,9",489,125,17,24,41,29,162,51,40,visuellt_motlast_s276
 1998,region,2580,SCB_SOS_1998_D2,276,3,valdistrikt,6,5:e valkretsen,Bergnäsets 2,1470,71,1141,"77,6",1115,182,35,55,40,48,505,184,66,visuellt_motlast_s276
 1998,region,2580,SCB_SOS_1998_D2,278,3,kommun_summa,1,5:e valkretsen,Hela kommunen,55724,1817,44742,"80,3",43817,6638,2111,2185,2393,1746,18650,6939,3155,kontrolltotal_från_bild
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,7,5:e valkretsen,Bergnäsets 3,1293,15,1161,"89,8",1141,287,64,110,90,50,368,82,90,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,8,5:e valkretsen,Björkskatans 1,1206,47,1035,"85,8",1010,103,69,54,51,39,432,197,65,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,9,5:e valkretsen,Björkskatans 2,1846,62,1480,"80,2",1445,166,52,94,78,79,647,235,94,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,10,5:e valkretsen,Brändön,509,2,415,"81,5",410,69,67,17,50,16,135,32,24,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,11,5:e valkretsen,Bälinge,384,7,328,"85,4",323,52,23,20,25,16,106,45,36,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,12,5:e valkretsen,Ersnäs,674,4,555,"82,3",550,62,52,23,48,27,248,57,33,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,13,5:e valkretsen,Gammelstad,682,19,506,"74,2",495,71,18,38,41,34,187,75,31,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,14,5:e valkretsen,Hertsöns 1,1363,66,1021,"74,9",1012,89,21,33,35,25,535,206,68,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,15,5:e valkretsen,Hertsöns 3,1270,85,932,"73,4",921,54,18,26,50,23,489,201,60,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,16,5:e valkretsen,Hertsöns 4,1230,104,947,"77,0",926,83,29,34,24,23,496,174,63,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,17,5:e valkretsen,Jämtön,273,8,224,"82,1",219,20,16,2,7,4,92,63,15,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,18,5:e valkretsen,Klöverträsk,410,4,342,"83,4",336,17,25,3,70,6,129,60,26,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,19,5:e valkretsen,Lerbäcken,709,36,557,"78,6",547,66,7,34,27,18,273,78,44,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,20,5:e valkretsen,Luleå 1,1584,18,1270,"80,2",1245,260,36,58,90,58,483,176,84,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,21,5:e valkretsen,Luleå 2,1586,26,1288,"81,2",1256,302,49,85,86,53,448,154,79,preliminar_bildtranskription
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,7,5:e valkretsen,Bergnäsets 3,1293,15,1161,"89,8",1141,287,64,110,90,50,368,82,90,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,8,5:e valkretsen,Björkskatans 1,1206,47,1035,"85,8",1010,103,69,54,51,39,432,197,65,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,9,5:e valkretsen,Björkskatans 2,1846,62,1480,"80,2",1445,166,52,94,78,79,647,235,94,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,10,5:e valkretsen,Brändön,509,2,415,"81,5",410,69,67,17,50,16,135,32,24,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,11,5:e valkretsen,Bälinge,384,7,328,"85,4",323,52,23,20,25,16,106,45,36,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,12,5:e valkretsen,Ersnäs,674,4,555,"82,3",550,62,52,23,48,27,248,57,33,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,13,5:e valkretsen,Gammelstad,682,19,506,"74,2",495,71,18,38,41,34,187,75,31,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,14,5:e valkretsen,Hertsöns 1,1363,66,1021,"74,9",1012,89,21,33,35,25,535,206,68,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,15,5:e valkretsen,Hertsöns 3,1270,85,932,"73,4",921,54,18,26,50,23,489,201,60,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,16,5:e valkretsen,Hertsöns 4,1230,104,947,"77,0",926,83,29,34,24,23,496,174,63,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,17,5:e valkretsen,Jämtön,273,8,224,"82,1",219,20,16,2,7,4,92,63,15,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,18,5:e valkretsen,Klöverträsk,410,4,342,"83,4",336,17,25,3,70,6,129,60,26,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,19,5:e valkretsen,Lerbäcken,709,36,557,"78,6",547,66,7,34,27,18,273,78,44,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,20,5:e valkretsen,Luleå 1,1584,18,1270,"80,2",1245,260,36,58,90,58,483,176,84,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,21,5:e valkretsen,Luleå 2,1586,26,1288,"81,2",1256,302,49,85,86,53,448,154,79,visuellt_motlast_s277
 1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,22,5:e valkretsen,Luleå 3,1811,36,1425,"78,7",1389,335,48,73,60,44,569,180,80,preliminar_bildtranskription
 1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,23,5:e valkretsen,Luleå 4,1643,27,1311,"79,8",1284,308,59,79,65,40,505,140,88,preliminar_bildtranskription
 1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,24,5:e valkretsen,Luleå 5,998,21,762,"76,4",748,152,31,36,48,34,284,128,35,preliminar_bildtranskription
