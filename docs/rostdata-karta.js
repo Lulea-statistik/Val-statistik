@@ -19,7 +19,7 @@ const FIELD_INVALID='med ogiltiga valsedlar';
 const FIELDS=['OG varav blanka','OG varav ÖVR ogiltiga','OG varav EGEJ, ej anmälda part.'];
 const fmt=new Intl.NumberFormat('sv-SE',{maximumFractionDigits:1});
 const norm=s=>String(s||'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'')
-.replace(/\b(bergna|hertso|porson|sunderbyn)s(?=\s*[123]\b)/g,'$1').replace(/[^a-z0-9]/g,'');
+ .replace(/[^a-z0-9]/g,'').replace(/(bergnaset|hertson|porson|sunderbyn)s(?=[123]$)/g,'$1');
 const props=f=>f.properties||{};
 const name=f=>props(f).valdistriktsnamn||props(f).VD_NAMN||props(f).VDNAMN||props(f).NAMN||props(f).Vdnamn||props(f).Valdistriktsnamn||'';
 const special=s=>/^(lulea|uppsamlingsdistrikt)$/.test(norm(s));
