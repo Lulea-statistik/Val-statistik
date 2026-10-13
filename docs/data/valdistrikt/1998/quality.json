@@ -1,0 +1,23 @@
+{
+  "year": 1998,
+  "kommunkod": "2580",
+  "feature_count": 56,
+  "source_layer": "2002 reconstructed, not 2002 original",
+  "source_document": "Lulea KF 2001-10-29 section 140, page 4, dashed previous boundary",
+  "modified_districts": [
+    "25800267",
+    "25800268"
+  ],
+  "approximate_transfer_area_m2": 109153.62,
+  "changed_area_is_estimate": true,
+  "unchanged_geometry_features": 54,
+  "reference_point_epsg3006": [
+    829939,
+    7296378
+  ],
+  "geometry_precision": "preliminary manual map alignment, NOT verified parcel-level georeferencing",
+  "boundaries_1994_equal_1998": "working assumption; not independently verified",
+  "source_status": "provisional_reconstruction",
+  "no_overlap_m2": 0.0,
+  "no_gap_change_m2": 0.0
+}
