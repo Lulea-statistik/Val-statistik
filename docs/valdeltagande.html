@@ -93,7 +93,7 @@ function repaintVotes(){
   const r=getVoteData(l.feature,loadedYear);layerVoteMap.set(l,r);
   const value=voteValue(r);if(value!==null)minmax.push(value);
  });
- const min=minmax.length?Math.min(...minmax):0,max=minmax.length?Math.max(...minmax):100;
+ const min=0,max=minmax.length?Math.max(...minmax):100;
  currentLayer.eachLayer(l=>{
   const selected=districtSelect.value===districtCode(l.feature);
   const r=layerVoteMap.get(l),n=voteValue(r);
@@ -102,7 +102,7 @@ function repaintVotes(){
   l.setPopupContent('<strong>'+safe+'</strong><p>Valår: '+loadedYear+'</p>'+printable(r));
  });
  const status=document.getElementById('voteStatus'),legend=document.getElementById('voteLegend');
- status.textContent=voteReady?minmax.length+' av '+(currentLayer.getLayers().length)+' distrikt med matchade värden':'Röstdatafilen saknas på GitHub. Geografikartan fungerar ändå.';
+ status.textContent=voteReady?minmax.length+' av '+(currentLayer.getLayers().length)+' distrikt med matchade värden':'Röstdatafilen saknas på GitHub – ladda upp data/import/rostdata_v3.csv. Kartan går att navigera men statistikfärger saknas.';
  legend.textContent='Dynamisk färgskala: grön = '+nf.format(min)+' %, röd = '+nf.format(max)+' %. Grå = saknas.';
 }
 fetch(voteDataUrl).then(r=>{if(!r.ok)throw Error('missing');return r.json()}).then(data=>{
