@@ -31,11 +31,11 @@ SOURCES={
 }
 def fetch_archive(year,session):
     page,labels=SOURCES[year]
-    if year==2018:
-        url="https://historik.val.se/val/val2018/statistik/2018_valgeografi_valdistrikt.zip"
+    if year in (2014,2018):
+        url={2014:"https://historik.val.se/val/val2014/statistik/gis/valgeografi_valdistrikt.zip",2018:"https://historik.val.se/val/val2018/statistik/2018_valgeografi_valdistrikt.zip"}[year]
         r=session.get(url,timeout=180);r.raise_for_status()
         if not zipfile.is_zipfile(__import__("io").BytesIO(r.content)):
-            raise RuntimeError("Official 2018 archive is not a ZIP")
+            raise RuntimeError(f"Official {year} archive is not a ZIP")
         return url,r.content
     r=session.get(page,timeout=45);r.raise_for_status()
     soup=BeautifulSoup(r.text,"html.parser")
@@ -88,7 +88,7 @@ def read_shapefile(z):
     crs=CRS.from_wkt(z.read(prj).decode("utf-8-sig",errors="replace"))
     with tempfile.TemporaryDirectory() as tmp:
         z.extractall(tmp)
-        reader=shapefile.Reader(str(Path(tmp)/shp[0]),encodingErrors="replace")
+        reader=shapefile.Reader(str(Path(tmp)/shp[0]),encoding="cp1252",encodingErrors="strict")
         fields=[f[0] for f in reader.fields[1:]]
         features=[]
         for record in reader.iterShapeRecords():
