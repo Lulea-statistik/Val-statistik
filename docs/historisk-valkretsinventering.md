@@ -29,3 +29,13 @@ Uppgiften att Luleå hade två valkretsar 1994 **är inte verifierad** och ska i
 För närvarande ligger Pages på **main/docs**. Därför finns `docs/index.html` som startsida; den läser GeoJSON från `../data/`, vilket fungerar under GitHub Pages för detta repo även när HTML-filen ligger i `docs/`. Om GitHub Pages endast publicerar `docs/` kan dock filer utanför den mappen **inte** hämtas som webbresurser. Webbdatan måste därför också publiceras under `docs/data/` eller Pages-källan bytas till repositoryroten. Kontrollera detta innan kartan betraktas som färdig.
 
 SCB:s äldre publikationer: https://www.scb.se/hitta-statistik/aldre-statistik/innehall/sveriges-officiella-statistik-sos/valstatistik-19091999/allmanna-valen-1970-1998/
+
+## Publikationsinventering påbörjad 13 oktober 2026
+
+[Inventeringen 1970–2026](../data/kallor/publikationsinventering_1970_2026.csv) har 51 separata poster för de tre valtyperna under 17 valår. Det är inte 51 verifierade PDF-filer. För åren 1970–1994 är SCB:s del 2 en gemensam publikation för landstings- och kommunfullmäktigeval, vilket innebär att två registerposter kan referera till samma volym. För 1998 har landstingsvalets del 2 en känd direktlänk; övriga direktlänkar ska identifieras och testas före datainläsning.
+
+Först läses källans innehållsförteckning och distriktsvisa tabellsidor. Alla distriktsvärden kontrolleras mot kommun- och valkretstotaler; inga preliminära numeriska värden behandlas som verifierade.
+
+## Publicering
+
+GitHub Pages är inställt på `main/docs` enligt användarens skärmbild och innehåller nu både `docs/index.html` och `docs/data/lulea_valdistrikt_2002.geojson`. Den offentliga sidans tillgänglighet har inte kunnat verifieras genom extern HTTP-kontroll i denna session.
