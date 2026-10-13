@@ -57,7 +57,7 @@ def fetch_archive(year,session):
 def code_column(properties):
     for k,v in properties.items():
         key=re.sub(r"[^a-z0-9]","",k.casefold())
-        if key in ("vd","vdkod","valdistriktskod","valdistriktkod","valdistriktid","vdid","vdnr","valdistrikt","kod","vdk"):
+        if key in ("vd","vdkod","valdistriktskod","valdistriktkod","valdistriktid","vdid","vdnr","valdistrikt","kod","vdk","lkfv"):
             sv=str(v).strip().split(".")[0]
             if re.fullmatch(r"2580\d{4}",sv):return True
     return False
