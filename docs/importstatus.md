@@ -4,9 +4,11 @@
 - [x] Sju ingående filer identifierade.
 - [x] Befintligt GitHub-repository och skrivbehörighet verifierade.
 - [x] README och metodmetadata förberedda.
-- [ ] Originalfiler uppladdade till `data/valdistrikt/2002/`.
+- [x] GeoJSON (EPSG:4326, 56 distrikt) uppladdad till `data/valdistrikt/2002/`.
+- [ ] Övriga originalformat uppladdade.
 - [ ] Automatiska verifieringar körda på filer i GitHub.
-- [ ] Interaktiv karta publicerad via GitHub Pages.
+- [x] Interaktiv Leaflet-karta inlagd som `index.html`.
+- [ ] GitHub Pages aktiverad och webbplatsen verifierad.
 
 ## Arkivinnehåll
 ```
