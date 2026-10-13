@@ -31,8 +31,8 @@ SOURCES={
 }
 def fetch_archive(year,session):
     page,labels=SOURCES[year]
-    if year in (2014,2018):
-        url={2014:"https://historik.val.se/val/val2014/statistik/gis/valgeografi_valdistrikt.zip",2018:"https://historik.val.se/val/val2018/statistik/2018_valgeografi_valdistrikt.zip"}[year]
+    if year in (2006,2014,2018):
+        url={2006:"https://historik.val.se/val/val2006/slutlig_ovrigt/statistik/kartor/riksdagen_i_valdistrikt.zip",2014:"https://historik.val.se/val/val2014/statistik/gis/valgeografi_valdistrikt.zip",2018:"https://historik.val.se/val/val2018/statistik/2018_valgeografi_valdistrikt.zip"}[year]
         r=session.get(url,timeout=180);r.raise_for_status()
         if not zipfile.is_zipfile(__import__("io").BytesIO(r.content)):
             raise RuntimeError(f"Official {year} archive is not a ZIP")
@@ -65,7 +65,7 @@ def code_column(properties):
 def municipality(properties):
     for k,v in properties.items():
         key=re.sub(r"[^a-z0-9]","",k.casefold())
-        if key in ("kommunkod","kommunid","komkod","knkod","kommunnr","komnr","kommunk","kn","knkod4","kom") :
+        if key in ("kommunkod","kommunid","komkod","knkod","kommunnr","komnr","kommunk","kn","knkod4","kom"):
             if str(v).strip() in ("2580","2580.0"):return True
     return code_column(properties)
 
@@ -118,8 +118,7 @@ def run(year,root):
         matched.append(f)
     if not matched:raise RuntimeError("No provable Lulea 2580 features; inspect original property schema.")
     transformer=Transformer.from_crs(crs,CRS.from_epsg(4326),always_xy=True)
-    output=[]
-    for f in matched:
+    # Multiple source records can represent pieces of the same 2006 district.\n    # Merge by verified eight-digit district code to avoid duplicated district options.\n    if year==2006:\n        from collections import defaultdict\n        from shapely.ops import unary_union\n        groups=defaultdict(list)\n        for feature in matched:\n            code=str(feature["properties"]["Lkfv"])\n            groups[code].append(feature)\n        merged=[]\n        for code, parts in sorted(groups.items()):\n            props=dict(parts[0]["properties"])\n            if any(str(f["properties"].get("KOM"))!="2580" or str(f["properties"].get("NAMN"))!=str(props["NAMN"]) for f in parts):\n                raise RuntimeError(f"Inconsistent source attributes for {code}")\n            props["source_part_count"]=len(parts)\n            merged.append({"type":"Feature","properties":props,"geometry":mapping(unary_union([shape(f["geometry"]) for f in parts]))})\n        matched=merged\n    output=[]\n    for f in matched:
         g=transform(transformer.transform,shape(f["geometry"]))
         if not g.is_valid:raise RuntimeError("Reprojection resulted in invalid geometry")
         if not (18.0<=g.bounds[0]<=25.0 and 64.0<=g.bounds[1]<=68.0 and 18.0<=g.bounds[2]<=25.0 and 64.0<=g.bounds[3]<=68.0):
