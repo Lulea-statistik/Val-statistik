@@ -118,7 +118,23 @@ def run(year,root):
         matched.append(f)
     if not matched:raise RuntimeError("No provable Lulea 2580 features; inspect original property schema.")
     transformer=Transformer.from_crs(crs,CRS.from_epsg(4326),always_xy=True)
-    # Multiple source records can represent pieces of the same 2006 district.\n    # Merge by verified eight-digit district code to avoid duplicated district options.\n    if year==2006:\n        from collections import defaultdict\n        from shapely.ops import unary_union\n        groups=defaultdict(list)\n        for feature in matched:\n            code=str(feature["properties"]["Lkfv"])\n            groups[code].append(feature)\n        merged=[]\n        for code, parts in sorted(groups.items()):\n            props=dict(parts[0]["properties"])\n            if any(str(f["properties"].get("KOM"))!="2580" or str(f["properties"].get("NAMN"))!=str(props["NAMN"]) for f in parts):\n                raise RuntimeError(f"Inconsistent source attributes for {code}")\n            props["source_part_count"]=len(parts)\n            merged.append({"type":"Feature","properties":props,"geometry":mapping(unary_union([shape(f["geometry"]) for f in parts]))})\n        matched=merged\n    output=[]\n    for f in matched:
+    # 2006 source repeats district codes for disjoint polygon parts.
+    if year==2006:
+        from collections import defaultdict
+        from shapely.ops import unary_union
+        groups=defaultdict(list)
+        for feature in matched:
+            code=str(feature["properties"]["Lkfv"])
+            groups[code].append(feature)
+        merged=[]
+        for code,parts in sorted(groups.items()):
+            props=dict(parts[0]["properties"])
+            if any(str(x["properties"].get("KOM"))!="2580" or str(x["properties"].get("NAMN"))!=str(props["NAMN"]) for x in parts):
+                raise RuntimeError(f"Inconsistent source attributes for {code}")
+            props["source_part_count"]=len(parts)
+            merged.append({"type":"Feature","properties":props,"geometry":mapping(unary_union([shape(x["geometry"]) for x in parts]))})
+        matched=merged
+    output=[]\n    for f in matched:
         g=transform(transformer.transform,shape(f["geometry"]))
         if not g.is_valid:raise RuntimeError("Reprojection resulted in invalid geometry")
         if not (18.0<=g.bounds[0]<=25.0 and 64.0<=g.bounds[1]<=68.0 and 18.0<=g.bounds[2]<=25.0 and 64.0<=g.bounds[3]<=68.0):
