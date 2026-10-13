@@ -39,6 +39,7 @@ const sources={
   2026:'data/valdistrikt/2026/lulea_2580_valdistrikt_2026_epsg4326.geojson'
 };
 const yearSelect=document.getElementById('year'),districtSelect=document.getElementById('district');
+const countEl=document.getElementById('count'),statusEl=document.getElementById('selection');
 let currentLayer=null,currentBounds=null,municipalityLayer=null,municipalityBounds=null,loadedYear=null,loadSequence=0;
 function fitMunicipality(){
  const bounds=municipalityBounds||currentBounds;
