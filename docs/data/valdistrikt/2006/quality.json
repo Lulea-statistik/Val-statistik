@@ -1,0 +1,16 @@
+{
+  "valar": 2006,
+  "kommunkod": "2580",
+  "source_page": "https://historik.val.se/val/val2006/slutlig_ovrigt/statistik/kartor/index.html",
+  "archive_url": "https://historik.val.se/val/val2006/slutlig_ovrigt/statistik/kartor/riksdagen_i_valdistrikt.zip",
+  "source_sha256": "a98588664fa3bd8b610913ffe1bd825515472fd91dd65fa1d8eacc56929c9bf5",
+  "source_crs": "EPSG:2400",
+  "target_crs": "EPSG:4326",
+  "feature_count": 56,
+  "geometry_types": [
+    "MultiPolygon",
+    "Polygon"
+  ],
+  "checked_utc": "2026-10-13T11:08:09.469902+00:00",
+  "status": "imported_requires_crossyear_boundary_review"
+}
