@@ -57,3 +57,9 @@ Ingen distriktsrad ska markeras verifierad enbart för att en PDF-adress verkar 
 Ytterligare tre direktlänkar som användaren tillhandahållit finns nu i [källregistret](../data/kallor/scb_sos_kompletterande_pdf.csv): 1970 del 1 (riksdag), 1970 del 2 (kommunala val) och 1998 del 3 (kommunfullmäktige). Dessa är registrerade som primärkällor men deras tabeller/sidor har ännu inte blivit individuellt extraherade eller avstämda. Direkt hämtning misslyckades vid kontroll, så länkarna kan ännu inte markeras som tekniskt verifierade.
 
 1998 års publikation ska behandlas uttryckligen annorlunda: del 1 riksdag, del 2 landstingsfullmäktige, del 3 kommunfullmäktige. I 1970 års del 2 måste tabeller för både kommun- och landstingsval identifieras separat.
+
+## Första preliminära transkription – 1998 landstingsval
+
+Fem distriktsrader (Avvik, Antnäs, Avan, Bensbyn, Bergnäsets 1) samt kommuntotal från SCB:s tabell 3 s. 277–278 har registrerats i [preliminär CSV](../data/valresultat/1998/landsting_lulea_2580_utdrag_preliminart.csv). Varje rad innehåller alla numeriska kolumner synliga i dessa delar av tabellen: röstberättigade, utländska medborgare, röstande, valdeltagande, giltiga valsedlar och åtta partikategorier. Originaltabellen saknar explicit kolumn för ogiltiga röster; den kan härledas som röstande minus giltiga men bevaras inte som om den vore originalkolumn.
+
+Aritmetisk kontroll utförd för sex registrerade rader: giltiga = summan av partiröster, samt valdeltagande korrekt avrundat till en decimal. **Detta är inte en färdig originalgranskning eller komplett import av 1998 års distrikt.** Original-PDF-servern var otillgänglig vid försöket. Kontrollkod: [validate_landsting_1998.py](../scripts/validate_landsting_1998.py).
