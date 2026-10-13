@@ -74,7 +74,24 @@ def inspect_geojson(data, year):
     if collection.get("type")!="FeatureCollection":raise RuntimeError("Expected GeoJSON FeatureCollection")
     crs=collection.get("crs",{})
     name=(crs.get("properties") or {}).get("name","")
-    if not name:raise RuntimeError("Missing source CRS; specify and independently verify CRS from official file metadata before conversion")
+    if not name:
+        if year!=2022:
+            raise RuntimeError("Missing source CRS; specify and verify the original metadata")
+        # Valmyndigheten's 2022 Norrbotten archive is supplied in SWEREF 99 TM.
+        # Check a source coordinate is projected, not WGS84 longitude/latitude.
+        def first_pair(obj):
+            if isinstance(obj,(list,tuple)):
+                if len(obj)>=2 and all(isinstance(v,(int,float)) for v in obj[:2]):
+                    return obj[:2]
+                for child in obj:
+                    pair=first_pair(child)
+                    if pair is not None:return pair
+            return None
+        first=next((p for f in collection.get("features",[])
+                   if (p:=first_pair((f.get("geometry") or {}).get("coordinates",[]))) is not None),None)
+        if first is None or not (100000<=first[0]<=1000000 and 6000000<=first[1]<=8000000):
+            raise RuntimeError(f"Unexpected coordinates for 2022 EPSG:3006 source: {first}")
+        name="EPSG:3006"
     epsg=CRS.from_user_input(name)
     return collection.get("features",[]),epsg
 
