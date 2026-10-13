@@ -21,3 +21,5 @@ Det ursprungliga arkivet `lulea_valdistrikt_2002_reconstructed_bundle.zip` har �
 3. Aktivera GitHub Pages (Settings > Pages > Deploy from branch: main, /root) för webbkartan. Årsväljaren utökas vid fler år.
 
 Licens för källdata ska granskas före vidare återpublicering.
+## SCB:s historiska valtabeller
+Åtta officiella SCB-tabeller är registrerade i [källregistret](docs/scb-kallregister.md) och [maskinläsbar CSV](data/kallor/scb_valtabeller.csv). De finns också länkade på kartans webbplats. Tabellen omfattar mandat, valresultat, personröster och röstberättigade med olika tidsintervall och geografisk nivå. Källregistret är inte en import av tabellvärden.
