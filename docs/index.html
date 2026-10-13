@@ -71,7 +71,16 @@ function chooseDistrict(code){
    l.setStyle({color:chosen?'#222':'#a52635',weight:chosen?3:1.5,fillColor:'#c64650',fillOpacity:chosen?.65:.3});
    if(chosen)match=l;
  });
- if(match){map.fitBounds(match.getBounds(),{padding:[24,24]});match.openPopup()}
+ if(match){
+   // Leaflet Polygon.getCenter() uses the polygon's area-weighted center,
+   // rather than the bounding box center. Always recenter even at the same zoom.
+   const bounds=match.getBounds();
+   const center=match.getCenter();
+   const fittedZoom=map.getBoundsZoom(bounds,false,L.point(64,64));
+   const targetZoom=Math.max(8,Math.min(15,fittedZoom));
+   map.flyTo(center,targetZoom,{animate:true,duration:0.55});
+   match.openPopup();
+ }
  else {map.closePopup();fitMunicipality()}
 }
 async function readYear(year){
@@ -96,7 +105,7 @@ async function loadYear(year){
   if(requestId!==loadSequence)return;
   const nextLayer=L.geoJSON(data,{style:()=>({color:'#a52635',weight:1.5,fillColor:'#c64650',fillOpacity:.3}),
    onEachFeature:(feature,l)=>{
-     l.bindPopup('<strong>'+districtName(feature).replaceAll('&','&amp;').replaceAll('<','&lt;')+'</strong><p>Valdistrikt: '+districtCode(feature)+'</p><p>Valår: '+year+'</p>');
+     l.bindPopup('<strong>'+districtName(feature).replaceAll('&','&amp;').replaceAll('<','&lt;')+'</strong><p>Valdistrikt: '+districtCode(feature)+'</p><p>Valår: '+year+'</p>',{autoPan:false});
      l.on('click',()=>{districtSelect.value=districtCode(feature);chooseDistrict(districtSelect.value)});
    }
   });
