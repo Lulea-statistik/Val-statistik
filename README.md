@@ -23,3 +23,6 @@ Det ursprungliga arkivet `lulea_valdistrikt_2002_reconstructed_bundle.zip` har �
 Licens för källdata ska granskas före vidare återpublicering.
 ## SCB:s historiska valtabeller
 Åtta officiella SCB-tabeller är registrerade i [källregistret](docs/scb-kallregister.md) och [maskinläsbar CSV](data/kallor/scb_valtabeller.csv). De finns också länkade på kartans webbplats. Tabellen omfattar mandat, valresultat, personröster och röstberättigade med olika tidsintervall och geografisk nivå. Källregistret är inte en import av tabellvärden.
+
+## Geografisk avgränsning
+Historisk valstatistik importeras **endast för Luleå kommun (2580)**. Samtliga relevanta originalkolumner och distriktsrader bevaras; kommun-/valkretstotaler särredovisas för att undvika dubbelräkning. Se [importpolicy](docs/importpolicy-lulea-2580.md) och [kontroll av kommunkod](scripts/validate_lulea_scope.py). Original-PDF:erna har ännu inte fullständigt transkriberats.
