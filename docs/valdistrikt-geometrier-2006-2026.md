@@ -45,3 +45,16 @@ SCB hänvisar till Valmyndigheten för valdistriktsgränser: https://www.scb.se/
 **Hämtstatus:** Den direkta ZIP-hämtningen från den aktuella arbetsmiljön stoppades av DNS-/nätverksbegränsning. GitHub Actions-status kunde inte avläsas från den anslutna GitHub-åtgärden. Ingen ny årgång markeras importerad eller geografiskt kvalitetssäkrad med denna kontrolluppdatering.
 
 **Kritiskt:** Importskriptet är fail-closed vid saknat CRS. De ZIP-format som endast ger extern uppgift om EPSG måste granskas innan användaren eller arbetsflödet anger detta explicit. Om en årsfil innehåller flera shapefiler måste rätt originaldistriktslager identifieras, inte väljas godtyckligt.
+
+## Verifierat lokalt original 2014 och jämförelse 2018 (13 oktober 2026)
+
+Användaren laddade upp `valgeografi_valdistrikt.zip` från Valmyndighetens 2014-arkiv. ZIP-källans SHA-256 är `01a0bd82df43dde450bdbaaed9eb160354ad00b97e21daec51b6181adb25033a`.
+
+- Shapefile med **5 837 distrikt** i Sverige, två ursprungliga attribut `VD` och `VD_NAMN`. Ingen separat `KOM`-kolumn: filter sker med **prefix `2580` i det åttasiffriga `VD`**.
+- Kodning `cp1252` (standard UTF-8 ger avkodningsfel). `valgeografi_valdistrikt.prj` anger SWEREF99 TM, EPSG:3006.
+- **44 distriktsobjekt för Luleå**, 44 unika koder, 43 Polygon och 1 MultiPolygon. Alla giltiga. Parvisa överlapp totalt cirka **0,184 m²** (avrundningsprecision), ingen automatisk reparation.
+- Sammanlagd unionsyta cirka **3 949,362 km²**.
+- 2018 har samma 44 koder. När bägge ursprungliga polygonuppsättningar återtransformeras till EPSG:3006 uppgår den sammanlagda symmetriska areaskillnaden till cirka **230,5 m²**, varav Alvik–Ersnäs cirka 105,3 m² och Antnäs–Måttsund cirka 102,3 m². Därmed mycket hög geometrisk stabilitet, men inte absolut koordinatidentitet.
+- GeoJSON, QA-metadata och jämförelsefil har skapats lokalt. GitHub Actions-flödet är ändrat för att försöka importera 2014 via Valmyndighetens direktarkiv, men **GitHub-publiceringen är ännu inte bekräftad**.
+
+**Notera:** 2014-arkivet har **inte** fältet `KOM`, så parsning av kommun 2580 ska ske via koden `VD`. Detta skiljer sig från Valmyndighetens 2018-arkiv där `KOM` finns.
