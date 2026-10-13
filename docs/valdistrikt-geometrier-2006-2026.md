@@ -68,3 +68,14 @@ Resultat: 5 668 polygonposter totalt i arkivet, **42 unika Luleådistrikt**, sam
 Jämförelse 2010–2014: alla 42 koder från 2010 finns i 2014 års datamängd som har 44 koder (2 tillkommande). De gemensamma kodernas sammanlagda symmetriska ytskillnad är cirka **2 020 km²**, och polygonernas samlade yta har ökat cirka **470 km²**. Detta är mycket stora skillnader jämfört med 2014–2018, och får **inte** automatiskt tolkas som faktiska förändringar i valdistrikt. Källa/metod/geografisk täckning, särskilt kustområden och havsyta, behöver kontrolleras innan jämförelsekartan får klassificera dessa förändringar.
 
 `import_historiska_valdistrikt.py` har uppdaterats att känna igen fältnamnet `LKFV`. Importlänk och ZIP-hämtning från Valmyndigheten i GitHub Actions har ännu inte bekräftats; **2026-10-13 är inte GitHub-publicering av 2010-data bekräftad**.
+
+## 2006 års uppladdade originalarkiv (13 oktober 2026)
+
+Källfil: `riksdagen_i_valdistrikt.zip` via `https://historik.val.se/val/val2006/slutlig_ovrigt/statistik/kartor/riksdagen_i_valdistrikt.zip`. Arkivet innehåller 6 150 rikstäckande polygonposter, med originalfält bl.a. `Lkfv`, `KOM`, `NAMN`, `KVK` och valresultatsfält. Källans PRJ anger **RT90 2,5 gon V, EPSG:2400**, inte EPSG:3006. Filter: `KOM=2580`.
+
+- Luleå har **63 poster motsvarande 56 unika valdistriktskoder**. Fyra distrikt har flera polygonposter (Luleå 14: 2, Antnäs: 4, Brändön: 2, Klöverträsk: 3). Dessa delar sammanförs per `Lkfv` till Polygon/MultiPolygon.
+- 56 unika distrikt, alla källpolygoner giltiga, noll geometriskt överlapp inom flyttalsnoggrannhet (under 0,001 m²); källpolygonernas unionsyta cirka **3 479,781 km²**.
+- Lokal GeoJSON EPSG:4326 och QA-rapport har skapats från användarens uppladdade original. **GitHub-publicering av GeoJSON återstår att bekräfta.**
+- **2006→2010:** 56→42 distrikt. 2010 års 42 koder återfinns i 2006 års fil, medan 14 äldre koder saknas 2010. De gemensamma kodernas *summerade* symmetriska ytskillnad är cirka 2 132,650 km². Detta mått speglar stora distriktsomläggningar/sammanslagningar och är inte en uppskattning av den faktiskt ändrade kommunarealen. 2006 års unionsyta ligger mycket nära 2010 års cirka 3 478,917 km²; mer tillförlitligt än rå summerad kodvis symmetrisk differens vid förändrade distriktsantal.
+
+Importskriptet har uppdaterats för att välja 2006 års direkta officiella arkiv, respektera RT90 från PRJ och sammanföra multipla polygonposter per åttasiffrig distriktskod. Arbetsflödets användning på GitHub måste separat verifieras.
