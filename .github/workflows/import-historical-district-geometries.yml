@@ -29,6 +29,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Show import source revision
+        run: |
+          git rev-parse HEAD
+          grep -n 'def inspect_geojson\|Unexpected coordinates for 2022' scripts/import_historiska_valdistrikt.py
       - name: Install GIS and HTTP dependencies
         run: pip install requests beautifulsoup4 pyshp shapely pyproj
       - name: Check GIS import Python syntax
