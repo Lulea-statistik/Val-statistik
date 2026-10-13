@@ -31,5 +31,7 @@ jobs:
         run: python scripts/validate_2002_geodata.py data/valdistrikt/2002/lulea_valdistrikt_2002_reconstructed_epsg4326.geojson
       - name: Audit complete 1998 source and separate postal remainder
         run: python scripts/audit_landsting_1998.py data/valresultat/1998/landsting_lulea_2580_utdrag_preliminart.csv data/valresultat/1998/landsting_lulea_2580_postroster.csv
+      - name: Validate 1998 Lulea municipal districts and postal votes
+        run: python scripts/validate_kommun_1998.py data/valresultat/1998/kommun_lulea_2580_distrikt.csv
       - name: Check 1970 QA fixture
         run: python scripts/validate_election_csv.py data/qa/exempel_scb_1970_s134.csv
