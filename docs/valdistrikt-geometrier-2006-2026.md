@@ -37,3 +37,11 @@ SCB hänvisar till Valmyndigheten för valdistriktsgränser: https://www.scb.se/
 ### Publiceringsgräns
 
 År ska inte markeras **färdigt/verifierat** förrän faktisk originalfil har laddats ned, schema och CRS kontrollerats samt kommunfilter, antal och topologi har validerats. Listan över källor innebär inte att geometrier redan finns publicerade.
+
+## Kontrolluppdatering 2026-10-13
+
+**2018**: Valmyndighetens ursprungliga statistikportal bekräftar direktarkivet `https://historik.val.se/val/val2018/statistik/2018_valgeografi_valdistrikt.zip` under *GIS och valgeografi* samt SWEREF99 TM (EPSG:3006). GeoJSON får först skapas efter kontroll mot faktiskt nedladdat ZIP-arkiv och dess PRJ. Även 2014–2018 års mappningsfil finns på samma källsida.
+
+**Hämtstatus:** Den direkta ZIP-hämtningen från den aktuella arbetsmiljön stoppades av DNS-/nätverksbegränsning. GitHub Actions-status kunde inte avläsas från den anslutna GitHub-åtgärden. Ingen ny årgång markeras importerad eller geografiskt kvalitetssäkrad med denna kontrolluppdatering.
+
+**Kritiskt:** Importskriptet är fail-closed vid saknat CRS. De ZIP-format som endast ger extern uppgift om EPSG måste granskas innan användaren eller arbetsflödet anger detta explicit. Om en årsfil innehåller flera shapefiler måste rätt originaldistriktslager identifieras, inte väljas godtyckligt.
