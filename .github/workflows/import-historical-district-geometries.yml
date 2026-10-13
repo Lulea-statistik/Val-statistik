@@ -1,10 +1,6 @@
 name: Import historical district geometries
 
 on:
-  push:
-    paths:
-      - 'scripts/import_historiska_valdistrikt.py'
-      - '.github/workflows/import-historical-district-geometries.yml'
   workflow_dispatch:
     inputs:
       year:
@@ -26,7 +22,7 @@ jobs:
   import:
     runs-on: ubuntu-latest
     concurrency:
-      group: import-valdistrikt-${{ github.event.inputs.year || '2014' }}
+      group: import-valdistrikt-${{ inputs.year }}
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
@@ -36,12 +32,12 @@ jobs:
       - name: Install GIS and HTTP dependencies
         run: pip install requests beautifulsoup4 pyshp shapely pyproj
       - name: Import Lulea municipal district geometries
-        run: python scripts/import_historiska_valdistrikt.py --year "${{ github.event.inputs.year || '2014' }}"
+        run: python scripts/import_historiska_valdistrikt.py --year "${{ inputs.year }}"
       - name: Commit validated source geometry and provenance
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "docs/data/valdistrikt/${{ github.event.inputs.year || '2014' }}/"
+          git add "docs/data/valdistrikt/${{ inputs.year }}/"
           git diff --cached --quiet && exit 0
-          git commit -m "Import official Lulea district geometry for ${{ github.event.inputs.year || '2014' }}"
+          git commit -m "Import official Lulea district geometry for ${{ inputs.year }}"
           git push
