@@ -3,7 +3,7 @@
 <title>Valdistrikt i Luleå 2002 | Val-statistik</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>body{margin:0;font:16px system-ui,sans-serif;color:#172333;background:#f4f6f8}header{padding:16px 24px;background:#fff;border-bottom:1px solid #dce3eb}h1{font-size:1.6rem;margin:0 0 8px}p{margin:4px 0;line-height:1.5}.layout{display:grid;grid-template-columns:minmax(230px,300px) 1fr;min-height:75vh}aside{padding:20px;background:#fff}#map{min-height:75vh}label{display:block;margin:15px 0 6px;font-weight:600}select,button{width:100%;padding:10px;border:1px solid #a8b7c5;border-radius:5px;background:white}button{margin-top:16px;cursor:pointer}.note{font-size:.87rem;color:#4b5a69;margin-top:22px}footer{padding:14px 20px;font-size:.85rem}a{color:#005999}@media(max-width:720px){.layout{display:flex;flex-direction:column}#map{height:62vh;min-height:450px}}</style></head>
-<body><header><h1>Valdistrikt i Luleå</h1><p>Historiska valdistriktsgränser för Luleå kommun, 2002–2026</p></header>
+<body><header><h1>Valdistrikt i Luleå</h1><p>Historiska valdistriktsgränser för Luleå kommun, 1994–2026</p></header>
 <div class="layout"><aside><label for="year">Valår</label><select id="year"><option value="2002">2002</option></select>
 <label for="election">Valtyp</label><select id="election"><option value="riksdag">Riksdagsval</option><option value="region">Landstings-/regionval</option><option value="kommun">Kommunfullmäktigeval</option></select>
 <label for="district">Valdistrikt</label><select id="district"><option value="">Alla valdistrikt</option></select>
@@ -28,6 +28,8 @@
 const map=L.map('map',{preferCanvas:true}).setView([65.59,22.15],10);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);
 const sources={
+  1994:'data/valdistrikt/1994/lulea_2580_valdistrikt_1994_preliminar_epsg4326.geojson',
+  1998:'data/valdistrikt/1998/lulea_2580_valdistrikt_1998_preliminar_epsg4326.geojson',
   2002:'data/lulea_valdistrikt_2002.geojson',
   2006:'data/valdistrikt/2006/lulea_2580_valdistrikt_2006_epsg4326.geojson',
   2010:'data/valdistrikt/2010/lulea_2580_valdistrikt_2010_epsg4326.geojson',
@@ -112,14 +114,23 @@ async function loadYear(year){
   const options=data.features.slice().sort((a,b)=>districtName(a).localeCompare(districtName(b),'sv')).map(f=>new Option(districtName(f)+' ('+districtCode(f)+')',districtCode(f)));
   districtSelect.replaceChildren(new Option('Alla valdistrikt',''),...options);
   countEl.textContent=data.features.length+' valdistrikt ('+year+')';
-  statusEl.textContent=year==='2002'?'Rekonstruerade gränser – ej officiell originalgeometri':'Valmyndighetens originalgeometrier – endast Luleå';
+  statusEl.textContent=(year==='1994'||year==='1998')?'Preliminär rekonstruktion från 2002 och kommunens gränskarta från 2001. Björkskatan 1–2 är ungefärligt georefererade, inte officiella GIS-gränser.':year==='2002'?'Rekonstruerade gränser – ej officiell originalgeometri':'Valmyndighetens originalgeometrier – endast Luleå';
   // Behåll användarens zoom och centrum vid byte av valår.
   if(municipalityLayer)municipalityLayer.bringToFront();
  }catch(e){if(requestId===loadSequence){countEl.textContent='Kunde inte läsa '+year+': '+e.message;yearSelect.value=loadedYear||'2002'}}
 }
 districtSelect.addEventListener('change',()=>chooseDistrict(districtSelect.value));
 document.getElementById('reset').addEventListener('click',()=>{districtSelect.value='';chooseDistrict('');fitMunicipality()});
-yearSelect.replaceChildren(...Object.keys(sources).map(y=>new Option(y,y)));
+yearSelect.replaceChildren(...Object.keys(sources).filter(y=>y!=='1994'&&y!=='1998').map(y=>new Option(y,y)));
+for(const year of ['1994','1998']){
+ fetch(sources[year]).then(r=>r.ok?r.json():null).then(data=>{
+  if(data?.features?.length!==56||!data.features.every(isLulea))return;
+  const option=new Option(year+' (rekonstruktion)',year);
+  const next=Array.from(yearSelect.options).find(o=>Number(o.value)>Number(year));
+  if(next)yearSelect.insertBefore(option,next);
+  else yearSelect.appendChild(option);
+ }).catch(()=>{});
+}
 yearSelect.addEventListener('change',()=>loadYear(yearSelect.value));
 loadYear('2002');
 </script></body></html>
