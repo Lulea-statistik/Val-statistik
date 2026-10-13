@@ -59,7 +59,7 @@ def code_column(properties):
 def municipality(properties):
     for k,v in properties.items():
         key=re.sub(r"[^a-z0-9]","",k.casefold())
-        if key in ("kommunkod","kommunid","komkod","knkod","kommunnr","komnr","kommunk","kn"):
+        if key in ("kommunkod","kommunid","komkod","knkod","kommunnr","komnr","kommunk","kn","knkod4","knkod_4") :
             if str(v).strip() in ("2580","2580.0"):return True
     return code_column(properties)
 
@@ -68,10 +68,7 @@ def inspect_geojson(data, year):
     if collection.get("type")!="FeatureCollection":raise RuntimeError("Expected GeoJSON FeatureCollection")
     crs=collection.get("crs",{})
     name=(crs.get("properties") or {}).get("name","")
-    if not name and year in (2022,2026):
-        # Official source pages explicitly state SWEREF99 TM; verify dataset range separately.
-        name="EPSG:3006"
-    if not name:raise RuntimeError("Missing source CRS; no automatic guess allowed")
+    if not name:raise RuntimeError("Missing source CRS; specify and independently verify CRS from official file metadata before conversion")
     epsg=CRS.from_user_input(name)
     return collection.get("features",[]),epsg
 
