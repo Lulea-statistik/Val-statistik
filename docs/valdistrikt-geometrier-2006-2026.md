@@ -79,3 +79,12 @@ Källfil: `riksdagen_i_valdistrikt.zip` via `https://historik.val.se/val/val2006
 - **2006→2010:** 56→42 distrikt. 2010 års 42 koder återfinns i 2006 års fil, medan 14 äldre koder saknas 2010. De gemensamma kodernas *summerade* symmetriska ytskillnad är cirka 2 132,650 km². Detta mått speglar stora distriktsomläggningar/sammanslagningar och är inte en uppskattning av den faktiskt ändrade kommunarealen. 2006 års unionsyta ligger mycket nära 2010 års cirka 3 478,917 km²; mer tillförlitligt än rå summerad kodvis symmetrisk differens vid förändrade distriktsantal.
 
 Importskriptet har uppdaterats för att välja 2006 års direkta officiella arkiv, respektera RT90 från PRJ och sammanföra multipla polygonposter per åttasiffrig distriktskod. Arbetsflödets användning på GitHub måste separat verifieras.
+
+## Kontroller av uppladdade GIS-filer för 2022 och 2026 (13 oktober 2026)
+
+Båda länsarkiven har kontrollerats direkt, och båda innehåller **157 distrikt i Norrbottens län**. De har filtrerats strikt till **Luleå kommun, kommunkod 2580**, vilket ger **49 unika valdistrikt 2022 och 49 unika valdistrikt 2026**. Ingen annan kommun ingår i de filtrerade GeoJSON-filerna.
+
+- **2022** `valdistrikt-norrbottens-lan (1).zip`: JSON har fälten `Lkfv`, `Vdnamn`, saknar CRS i själva GeoJSON-metadata; originalets koordinater har hanterats som SWEREF 99 TM (EPSG:3006) enligt den officiella leveransinformationen. ZIP SHA256: `71c6d3cd5b6ddc9cfb497005825998bc06600b2f2cfb2f8c069da4b87b54a88b`. 49/49 giltiga, ingen överlapp, unionsyta cirka **3 948,03 km²**.
+- **2026** `valdistrikt-norrbotten-lan-2026.zip`: GeoJSON metadata deklarerar uttryckligen EPSG:3006. Fälten `Kommunkod`, `Valdistriktskod`, `Valdistriktsnamn`. ZIP SHA256: `0872ad1c43dabc8455caeebd79b948fbbcead8afad7bcd7aa47cdc2b4e035f4a`. 49/49 giltiga, ingen överlapp, unionsyta cirka **4 954,23 km²**.
+- Alla 49 åttasiffriga distriktskoder återfinns båda åren. **2022 och 2026 skiljer sig i sammanlagd geometri med cirka 1 019,4 km² symmetrisk union-differens.** Det är inte ett estimat på ändrade valdistrikt; troligen påverkar skillnad i ytavgränsning för vatten/hav, vilket behöver utredas separat innan förändringsvisualisering.
+- De två filtrerade GeoJSON- och QA-filerna har skapats lokalt. **Publicering av dessa två stora geometrifiler på GitHub är fortfarande obekräftad.** Webbplatsen är uppdaterad till att bara erbjuda år vars GeoJSON finns och vars samtliga objekt hör till Luleå. Vid dataläsning tillämpas dessutom ett kommunfilter; övriga kommuner kan inte visas.
