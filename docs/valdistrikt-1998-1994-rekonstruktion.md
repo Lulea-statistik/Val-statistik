@@ -36,3 +36,13 @@ Sista sidan i dokumentet innehåller en karta i skala **1:6500** med förslag ti
 ## Kartans referensyta
 
 Webbplatsens kommungräns kommer från `Lulea-statistik/BR-brottsstatistik/docs/data/municipalities.geojson` och har kopierats till `docs/data/lulea_kommungrans_2580.geojson`. Den används enbart för **stabil geografisk kartinramning**, inte som historiskt verifierad land-/havsyta för något visst valår.
+
+## Geografisk referens från karta och kommunens kartportal (13 oktober 2026)
+
+Användaren har tillhandahållit en förstoring av bilagekartan från 2001 och en modern kartbild över **Bodskataudden, Stormvägen, Vinternäsets förskola och Björkskataskolan**, samt en koordinat **SWEREF 99 TM N 7296378, E 829939** som ligger **inne i det berörda området**.
+
+Transformering EPSG:3006 → EPSG:4326 (för kartvisning) ger ungefär **65,619750° N, 22,175423° E**. Detta är en **orienteringspunkt**, inte en digitaliserad brytpunkt eller en uppmätt punkt på valdistriktsgränsen. Webbkartan har därför en särskild knapp **Visa Björkskatan (gränsändring 2001)** som zoomar dit och visar referenspunkten.
+
+Kartutdragets legend: **streckad linje = nuvarande gräns (före föreslagen ändring år 2001)**, **heldragen linje = föreslagen gräns**. Därför är den streckade linjen den relevanta historiska gränskandidaten för 1998, medan den heldragna linjen endast visar föreslagen 2002-indelning. Den senare får inte behandlas som fastställd utan länsstyrelsens beslut. Skanningen har kartskala 1:6500 men kan ha skal-/rotationsförvrängning; fysisk georeferering kräver flera oberoende kontrollpunkter (exempelvis igenkännbara gatukorsningar och äldre fastighetsgränser), inte bara den tillhandahållna koordinaten.
+
+Varken en historisk polygon för 1998 eller en identisk indelning 1994 har ännu fastställts av en sådan koordinat.
