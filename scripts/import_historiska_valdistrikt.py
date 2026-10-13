@@ -53,7 +53,7 @@ def code_column(properties):
         key=re.sub(r"[^a-z0-9]","",k.casefold())
         if key in ("vd","vdkod","valdistriktskod","valdistriktkod","valdistriktid","vdid","vdnr","valdistrikt","kod","vdk"):
             sv=str(v).strip().split(".")[0]
-            if re.fullmatch(r"2580\\d{4}",sv):return True
+            if re.fullmatch(r"2580\d{4}",sv):return True
     return False
 
 def municipality(properties):
