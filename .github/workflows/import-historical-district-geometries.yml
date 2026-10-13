@@ -1,0 +1,43 @@
+name: Import historical district geometries
+
+on:
+  workflow_dispatch:
+    inputs:
+      year:
+        description: Election year
+        type: choice
+        required: true
+        options:
+          - '2006'
+          - '2010'
+          - '2014'
+          - '2018'
+          - '2022'
+          - '2026'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: import-valdistrikt-${{ inputs.year }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install GIS and HTTP dependencies
+        run: pip install requests beautifulsoup4 pyshp shapely pyproj
+      - name: Import Lulea municipal district geometries
+        run: python scripts/import_historiska_valdistrikt.py --year "${{ inputs.year }}"
+      - name: Commit validated source geometry and provenance
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "docs/data/valdistrikt/${{ inputs.year }}/"
+          git diff --cached --quiet && exit 0
+          git commit -m "Import official Lulea district geometry for ${{ inputs.year }}"
+          git push
