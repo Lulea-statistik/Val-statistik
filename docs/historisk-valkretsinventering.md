@@ -49,3 +49,11 @@ GitHub Pages är inställt på `main/docs` enligt användarens skärmbild och in
 **Publikationsdelar:** SCB bekräftar att 1970–1994 har del 1 riksdag och del 2 *Kommunala valen* (både kommun- och landstingsval). **1998** har del 1 riksdag, del 2 landstingsfullmäktige, del 3 kommunfullmäktige. Antagandet att del 2 alltid är kommunval är därför fel. Primär hänvisning: https://www.scb.se/hitta-statistik/aldre-statistik/innehall/sveriges-officiella-statistik-sos/valstatistik-19091999/allmanna-valen-1970-1998/
 
 Ingen distriktsrad ska markeras verifierad enbart för att en PDF-adress verkar rimlig; kontrollera dokumentets titel och rätt tabell/sida.
+
+## Avgränsning och tillkomna originalvolymer, 13 oktober 2026
+
+**Specialundersökningar ingår inte i projektet.** Granskningen omfattar enbart riksdagsval, landstings-/regionfullmäktigeval och kommunfullmäktigeval. Hänvisningar till specialundersökningar i äldre beskrivningar av SCB:s publikationsserie avser bara bibliografisk kontext och ska inte behandlas som arbetsposter.
+
+Ytterligare tre direktlänkar som användaren tillhandahållit finns nu i [källregistret](../data/kallor/scb_sos_kompletterande_pdf.csv): 1970 del 1 (riksdag), 1970 del 2 (kommunala val) och 1998 del 3 (kommunfullmäktige). Dessa är registrerade som primärkällor men deras tabeller/sidor har ännu inte blivit individuellt extraherade eller avstämda. Direkt hämtning misslyckades vid kontroll, så länkarna kan ännu inte markeras som tekniskt verifierade.
+
+1998 års publikation ska behandlas uttryckligen annorlunda: del 1 riksdag, del 2 landstingsfullmäktige, del 3 kommunfullmäktige. I 1970 års del 2 måste tabeller för både kommun- och landstingsval identifieras separat.
