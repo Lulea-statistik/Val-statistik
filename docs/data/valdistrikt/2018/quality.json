@@ -1,0 +1,15 @@
+{
+  "valar": 2018,
+  "kommunkod": "2580",
+  "source_page": "https://historik.val.se/val/val2018/statistik/",
+  "archive_url": "https://historik.val.se/val/val2018/statistik/2018_valgeografi_valdistrikt.zip",
+  "source_sha256": "1c49c46e30892de62f9457070ca785ee108eb943fad5abfed85ab51592e11bb6",
+  "source_crs": "EPSG:3006",
+  "target_crs": "EPSG:4326",
+  "feature_count": 44,
+  "geometry_types": [
+    "Polygon"
+  ],
+  "checked_utc": "2026-10-13T09:14:02.159950+00:00",
+  "status": "imported_requires_crossyear_boundary_review"
+}
