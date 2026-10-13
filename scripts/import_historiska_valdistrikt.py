@@ -31,6 +31,12 @@ SOURCES={
 }
 def fetch_archive(year,session):
     page,labels=SOURCES[year]
+    if year==2018:
+        url="https://historik.val.se/val/val2018/statistik/2018_valgeografi_valdistrikt.zip"
+        r=session.get(url,timeout=180);r.raise_for_status()
+        if not zipfile.is_zipfile(__import__("io").BytesIO(r.content)):
+            raise RuntimeError("Official 2018 archive is not a ZIP")
+        return url,r.content
     r=session.get(page,timeout=45);r.raise_for_status()
     soup=BeautifulSoup(r.text,"html.parser")
     matches=[]
@@ -59,7 +65,7 @@ def code_column(properties):
 def municipality(properties):
     for k,v in properties.items():
         key=re.sub(r"[^a-z0-9]","",k.casefold())
-        if key in ("kommunkod","kommunid","komkod","knkod","kommunnr","komnr","kommunk","kn","knkod4","knkod_4") :
+        if key in ("kommunkod","kommunid","komkod","knkod","kommunnr","komnr","kommunk","kn","knkod4","kom") :
             if str(v).strip() in ("2580","2580.0"):return True
     return code_column(properties)
 
