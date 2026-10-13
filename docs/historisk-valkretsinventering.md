@@ -39,3 +39,13 @@ Först läses källans innehållsförteckning och distriktsvisa tabellsidor. All
 ## Publicering
 
 GitHub Pages är inställt på `main/docs` enligt användarens skärmbild och innehåller nu både `docs/index.html` och `docs/data/lulea_valdistrikt_2002.geojson`. Den offentliga sidans tillgänglighet har inte kunnat verifieras genom extern HTTP-kontroll i denna session.
+
+## Källhierarki (fastställd 2026-10-13)
+
+1. **Primärkälla:** SCB:s *Allmänna valen* (SOS) 1970–1998, originalpublicerad PDF för respektive valår och valtyp. För 2002 och senare används officiella SCB-/Valmyndighetspublikationer och dokumenterat valresultat.
+2. **Kontroll:** SCB:s statistikdatabastabeller och kommun-/valkretstotaler för att stämma av historiska värden, med rätt geografisk nivå.
+3. **Oberoende dubbelkontroll:** SND/Researchdata, där åtkomliga data finns. Dessa får inte ersätta SCB som källa för publicerade slutliga värden och distrikts-/valkretskopplingar.
+
+**Publikationsdelar:** SCB bekräftar att 1970–1994 har del 1 riksdag och del 2 *Kommunala valen* (både kommun- och landstingsval). **1998** har del 1 riksdag, del 2 landstingsfullmäktige, del 3 kommunfullmäktige. Antagandet att del 2 alltid är kommunval är därför fel. Primär hänvisning: https://www.scb.se/hitta-statistik/aldre-statistik/innehall/sveriges-officiella-statistik-sos/valstatistik-19091999/allmanna-valen-1970-1998/
+
+Ingen distriktsrad ska markeras verifierad enbart för att en PDF-adress verkar rimlig; kontrollera dokumentets titel och rätt tabell/sida.
