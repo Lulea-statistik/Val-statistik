@@ -1,0 +1,15 @@
+{
+  "valar": 2010,
+  "kommunkod": "2580",
+  "source_page": "https://historik.val.se/val/val2010/statistik/index.html",
+  "archive_url": "https://historik.val.se/val/val2010/statistik/gis/alla_valdistrikt.zip",
+  "source_sha256": "337ec21b0cf14171722c42699ecddd9ad5099a0ea294829f1ec7258012d65c83",
+  "source_crs": "EPSG:3006",
+  "target_crs": "EPSG:4326",
+  "feature_count": 42,
+  "geometry_types": [
+    "Polygon"
+  ],
+  "checked_utc": "2026-10-13T11:09:30.087708+00:00",
+  "status": "imported_requires_crossyear_boundary_review"
+}
