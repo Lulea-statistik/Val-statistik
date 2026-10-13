@@ -1,0 +1,23 @@
+{
+  "year": 1970,
+  "status": "provisional_geometry_reconstruction",
+  "reference": "published 1994 reconstructed district layer",
+  "district_count": 55,
+  "unchanged_districts": 52,
+  "modified_codes": [
+    "25800106",
+    "25800107",
+    "25800350"
+  ],
+  "merged_codes": [
+    "25800350",
+    "25800371"
+  ],
+  "merged_historical_code": "unknown; retained 25800350 as map identifier",
+  "approx_transfer_lulea6_to7_m2": 661694.7,
+  "source_of_cut": "user-supplied screenshot, hand-estimated alignment; not surveyed",
+  "1991_is_original": false,
+  "pre1991_assumed_unchanged": true,
+  "conserved_lulea6_plus7_m2": 0.0,
+  "overlap_lulea6_and7_m2": 0.0
+}
