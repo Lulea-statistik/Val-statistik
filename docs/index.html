@@ -38,7 +38,22 @@ const sources={
 };
 const yearSelect=document.getElementById('year'),districtSelect=document.getElementById('district');
 const countEl=document.getElementById('count'),statusEl=document.getElementById('selection');
-let currentLayer=null,currentBounds=null,loadedYear=null,loadSequence=0;
+let currentLayer=null,currentBounds=null,municipalityLayer=null,municipalityBounds=null,loadedYear=null,loadSequence=0;
+function fitMunicipality(){
+ const bounds=municipalityBounds||currentBounds;
+ if(bounds?.isValid())map.fitBounds(bounds,{padding:[28,28],maxZoom:11});
+}
+fetch('data/lulea_kommungrans_2580.geojson').then(r=>{
+ if(!r.ok)throw Error('HTTP '+r.status);
+ return r.json();
+}).then(geo=>{
+ if(geo.features?.length!==1||String(geo.features[0].properties?.Kommunkod)!=='2580')throw Error('Fel kommunkod');
+ municipalityLayer=L.geoJSON(geo,{style:{color:'#243b53',weight:2.6,fill:false,opacity:.88},interactive:false}).addTo(map);
+ municipalityBounds=municipalityLayer.getBounds();
+ municipalityLayer.bringToFront();
+ fitMunicipality();
+}).catch(err=>{console.warn('Kommungränsen kunde inte läsas:',err)});
+
 const p=f=>f.properties||{};
 const districtCode=f=>String(p(f).valdistriktskod??p(f).Valdistriktskod??p(f).VD??p(f).Lkfv??p(f).LKFV??'').trim();
 const districtName=f=>String(p(f).valdistriktsnamn??p(f).Valdistriktsnamn??p(f).VD_NAMN??p(f).Vdnamn??p(f).VDNAMN??p(f).NAMN??'Namnlöst valdistrikt');
@@ -55,7 +70,7 @@ function chooseDistrict(code){
    if(chosen)match=l;
  });
  if(match){map.fitBounds(match.getBounds(),{padding:[24,24]});match.openPopup()}
- else if(currentBounds?.isValid()){map.closePopup();map.fitBounds(currentBounds,{padding:[20,20]})}
+ else {map.closePopup();fitMunicipality()}
 }
 async function readYear(year){
  const response=await fetch(sources[year]);
@@ -91,11 +106,12 @@ async function loadYear(year){
   districtSelect.replaceChildren(new Option('Alla valdistrikt',''),...options);
   countEl.textContent=data.features.length+' valdistrikt ('+year+')';
   statusEl.textContent=year==='2002'?'Rekonstruerade gränser – ej officiell originalgeometri':'Valmyndighetens originalgeometrier – endast Luleå';
-  if(currentBounds.isValid())map.fitBounds(currentBounds,{padding:[20,20]});
+  // Behåll användarens zoom och centrum vid byte av valår.
+  if(municipalityLayer)municipalityLayer.bringToFront();
  }catch(e){if(requestId===loadSequence){countEl.textContent='Kunde inte läsa '+year+': '+e.message;yearSelect.value=loadedYear||'2002'}}
 }
 districtSelect.addEventListener('change',()=>chooseDistrict(districtSelect.value));
-document.getElementById('reset').addEventListener('click',()=>{districtSelect.value='';chooseDistrict('')});
+document.getElementById('reset').addEventListener('click',()=>{districtSelect.value='';chooseDistrict('');fitMunicipality()});
 yearSelect.replaceChildren(...Object.keys(sources).map(y=>new Option(y,y)));
 yearSelect.addEventListener('change',()=>loadYear(yearSelect.value));
 loadYear('2002');
