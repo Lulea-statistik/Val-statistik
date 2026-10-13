@@ -13,3 +13,9 @@ Kommun: **2580 Luleå**. Valkrets: **5:e valkretsen**.
 Detta är en **andra visuell genomgång av sida 278**, inte en separat extern dubbelkodning av alla 56 distriktsrader. Resterande 44 distrikt (s. 276–277) behöver motsvarande systematisk kolumnvis motläsning innan hela datamängden märks verifierad. GitHub Actions-körningarnas resultat måste också följas upp.
 
 En viktig källbegränsning: SCB:s rapport förklarar att vissa poströster ingår direkt i valdistriktsresultaten, medan andra bara räknats in i kommunsumman. Restposten är därmed *inte* liktydig med alla förtidsröster, och det går inte att härleda var de avgivits.
+
+## Kontrollomgång 3 – tryckt sida 276
+
+Original-PDF:s sida 278 (tryckt sida 276) har lästs visuellt på nytt i hög upplösning. Alla 14 numeriska källfält (inkl. valdeltagande och 8 partier) och distriktsnamnen har jämförts med registrerad CSV för **Avvik, Antnäs, Avan, Bensbyn, Bergnäsets 1, Bergnäsets 2**. Ingen skillnad upptäckt. Dessa sex rader har fått status `visuellt_motlast_s276` i CSV:n. De 12 raderna på tryckt sida 278 motlästes i föregående kontrollomgång men har ännu inte särskild status per rad i CSV:n. Återstående 38 distrikt på sida 277 behöver motsvarande visuell motläsning.
+
+**Tolkning:** 6 rader med explicit radstatus och 12 tidigare dokumenterade som motlästa i protokoll, totalt 18 av 56. Aritmetisk samstämmighet för 56 rader är separat kontroll och ersätter inte visuell jämförelse.
