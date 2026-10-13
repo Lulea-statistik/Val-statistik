@@ -19,3 +19,9 @@ En viktig källbegränsning: SCB:s rapport förklarar att vissa poströster ing�
 Original-PDF:s sida 278 (tryckt sida 276) har lästs visuellt på nytt i hög upplösning. Alla 14 numeriska källfält (inkl. valdeltagande och 8 partier) och distriktsnamnen har jämförts med registrerad CSV för **Avvik, Antnäs, Avan, Bensbyn, Bergnäsets 1, Bergnäsets 2**. Ingen skillnad upptäckt. Dessa sex rader har fått status `visuellt_motlast_s276` i CSV:n. De 12 raderna på tryckt sida 278 motlästes i föregående kontrollomgång men har ännu inte särskild status per rad i CSV:n. Återstående 38 distrikt på sida 277 behöver motsvarande visuell motläsning.
 
 **Tolkning:** 6 rader med explicit radstatus och 12 tidigare dokumenterade som motlästa i protokoll, totalt 18 av 56. Aritmetisk samstämmighet för 56 rader är separat kontroll och ersätter inte visuell jämförelse.
+
+## Kontrollomgång 4 – tryckt sida 277, första 15 distriktsraderna
+
+Den uppladdade SCB-originalfilens PDF-sida 279 / tryckta sida 277 renderades på nytt och jämfördes med registrerad CSV. Distrikten **Bergnäsets 3, Björkskatans 1–2, Brändön, Bälinge, Ersnäs, Gammelstad, Hertsöns 1, 3 och 4, Jämtön, Klöverträsk, Lerbäcken, Luleå 1–2** motlästes i samtliga redovisade numeriska kolumner; ingen avvikelse noterades. De 15 CSV-raderna har status `visuellt_motlast_s277`.
+
+Sammanlagt är nu **33 av 56** distrikt motlästa mot originalbilder (6 på s. 276, 15 på s. 277 och 12 på s. 278). Återstår **23** distriktsrader på tryckt s. 277, från Luleå 3 till Persön. Ingen återstående rad får ännu uppgraderas från preliminär transkription endast på grund av godkänd aritmetik.
