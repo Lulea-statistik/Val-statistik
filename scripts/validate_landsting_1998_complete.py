@@ -15,7 +15,7 @@ def validate(path):
     errors=[]
     if len(ds)!=56: errors.append(f"expected 56 districts, got {len(ds)}")
     if len(totals)!=1: errors.append(f"expected 1 municipality total, got {len(totals)}")
-    if len({r["valdistrikt"] for r in ds})!=len(ds): errors.append("duplicate district name")
+    if len({r['valdistrikt'] for r in ds})!=len(ds): errors.append("duplicate district name")
     if any(r["kommunkod"]!="2580" or r["valtyp"]!="region" or r["valar"]!="1998" for r in rows):
         errors.append("wrong geography/election")
     try:
