@@ -72,10 +72,10 @@ function chooseDistrict(code){
    if(chosen)match=l;
  });
  if(match){
-   // Leaflet Polygon.getCenter() uses the polygon's area-weighted center,
-   // rather than the bounding box center. Always recenter even at the same zoom.
+   // Center between the outermost extent of all polygon parts.
+   // A polygon centroid can sit within just one part of a disjoint district.
    const bounds=match.getBounds();
-   const center=match.getCenter();
+   const center=bounds.getCenter();
    const fittedZoom=map.getBoundsZoom(bounds,false,L.point(64,64));
    const targetZoom=Math.max(8,Math.min(15,fittedZoom));
    map.flyTo(center,targetZoom,{animate:true,duration:0.55});
