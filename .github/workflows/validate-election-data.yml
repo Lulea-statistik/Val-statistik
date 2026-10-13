@@ -1,0 +1,29 @@
+name: Validate election data
+
+on:
+  push:
+    paths:
+      - 'data/**'
+      - 'scripts/**'
+      - '.github/workflows/validate-election-data.yml'
+  pull_request:
+    paths:
+      - 'data/**'
+      - 'scripts/**'
+      - '.github/workflows/validate-election-data.yml'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check historical 1998 landsting vote totals
+        run: python scripts/validate_landsting_1998.py data/valresultat/1998/landsting_lulea_2580_utdrag_preliminart.csv
+      - name: Check 2580 and provenance metadata
+        run: python scripts/validate_lulea_scope.py data/valresultat/1998/landsting_lulea_2580_utdrag_preliminart.csv
+      - name: Check 1970 QA fixture
+        run: python scripts/validate_election_csv.py data/qa/exempel_scb_1970_s134.csv
