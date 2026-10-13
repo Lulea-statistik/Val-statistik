@@ -54,8 +54,9 @@ function vdt(r){
  100*r.VDT/r['Röstberättigade']:null;
 }
 function invalidRate(r){
- return r&&num(r,FIELD_INVALID)!==null&&num(r,'VDT')>0?
- 100*r[FIELD_INVALID]/r.VDT:null;
+ const field=document.getElementById('invalidCategory')?.value||FIELD_INVALID;
+ return r&&num(r,field)!==null&&num(r,'VDT')>0?
+ 100*r[field]/r.VDT:null;
 }
 const palette=[ '#fff5f0','#fee0d2','#fcbba1','#fc9272','#fb6a4a','#de2d26','#a50f15' ];
 function color(value,type){
@@ -120,7 +121,7 @@ async function render(){
   layer=next.addTo(map);
   districtEl.replaceChildren(new Option('Alla valdistrikt',''),...geo.features
    .map(f=>name(f)).sort((a,b)=>a.localeCompare(b,'sv')).map(n=>new Option(n,n)));
-  statusEl.textContent=year+' · '+(kind==='RS'?'Riksdag':'Kommunfullmäktige')+
+  statusEl.textContent=year+' · '+(kind==='RS'?'Riksdag':'Kommunfullmäktige')+(requestedMode==='invalid'?' · '+document.getElementById('invalidCategory').selectedOptions[0].textContent:'')+
    ' · '+stats.mapped+' av '+geo.features.length+' valdistrikt matchade'+(stats.partial?' · '+stats.partial+' med ofullständiga fält':'');
   updateInfo('Grå områden saknar tillräckliga uppgifter. Kommuntotaler och uppsamlingsdistrikt visas inte som polygoner. VDT är antal röstande. Ogiltig andel beräknas mot VDT.');
   if(Number(year)<=1991)updateInfo(document.getElementById('info').textContent+' För 1970–1982 saknar denna tabell röstdata. Kartans äldre geometrier är rekonstruktioner.');
@@ -132,6 +133,7 @@ districtEl.addEventListener('change',()=>{
 });
 document.getElementById('reset').addEventListener('click',()=>{districtEl.value='';if(municipalityBounds)map.fitBounds(municipalityBounds,{padding:[24,24],maxZoom:11});});
 yearEl.addEventListener('change',render);voteEl.addEventListener('change',render);
+document.getElementById('invalidCategory')?.addEventListener('change',render);
 fetch('data/roster/rostdata_v3.json').then(r=>{if(!r.ok)throw Error('Import av röstdata väntar på publicering');return r.json()}).then(j=>{
  voteRows=j.rows;
  const years=[...new Set(voteRows.map(r=>Number(r['År'])))].filter(y=>GEO[y]).sort((a,b)=>a-b);
