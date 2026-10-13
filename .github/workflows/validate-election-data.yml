@@ -33,5 +33,7 @@ jobs:
         run: python scripts/audit_landsting_1998.py data/valresultat/1998/landsting_lulea_2580_utdrag_preliminart.csv data/valresultat/1998/landsting_lulea_2580_postroster.csv
       - name: Validate 1998 Lulea municipal districts and postal votes
         run: python scripts/validate_kommun_1998.py data/valresultat/1998/kommun_lulea_2580_distrikt.csv
+      - name: Validate 1998 Lulea Riksdag district and postal totals
+        run: python scripts/validate_riksdag_1998.py data/valresultat/1998/riksdag_lulea_2580_distrikt.csv
       - name: Check 1970 QA fixture
         run: python scripts/validate_election_csv.py data/qa/exempel_scb_1970_s134.csv
