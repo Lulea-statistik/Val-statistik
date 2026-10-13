@@ -1,0 +1,15 @@
+{
+  "valar": 2026,
+  "kommunkod": "2580",
+  "source_page": "https://www.val.se/valresultat-och-statistik/statistik-och-data/radata-val-2026",
+  "archive_url": "https://www.val.se/download/18.332cf48819bd61ac151389f/1785490246907/valdistrikt-norrbotten-lan-2026.zip",
+  "source_sha256": "0872ad1c43dabc8455caeebd79b948fbbcead8afad7bcd7aa47cdc2b4e035f4a",
+  "source_crs": "EPSG:3006",
+  "target_crs": "EPSG:4326",
+  "feature_count": 49,
+  "geometry_types": [
+    "MultiPolygon"
+  ],
+  "checked_utc": "2026-10-13T10:58:17.427223+00:00",
+  "status": "imported_requires_crossyear_boundary_review"
+}
