@@ -1,0 +1,28 @@
+name: Build reconstructed 1994 and 1998 district geometries
+on:
+  push:
+    paths:
+      - 'scripts/build_valdistrikt_1994_1998.py'
+      - '.github/workflows/build-valdistrikt-1994-1998.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install shapely pyproj
+      - run: python -m py_compile scripts/build_valdistrikt_1994_1998.py
+      - run: python scripts/build_valdistrikt_1994_1998.py
+      - name: Publish preliminary historical GIS layers
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/valdistrikt/1994/ docs/data/valdistrikt/1998/
+          git diff --cached --quiet && exit 0
+          git commit -m "Publish preliminary Bjorkskatan 1994 and 1998 district reconstruction"
+          git push
