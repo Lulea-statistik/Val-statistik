@@ -1,0 +1,22 @@
+{
+  "rows": 1190,
+  "vote_types": {
+    "RS": 595,
+    "KF": 595
+  },
+  "years": {
+    "2014": 92,
+    "2022": 102,
+    "2010": 88,
+    "2018": 92,
+    "2006": 116,
+    "1994": 118,
+    "1991": 118,
+    "1998": 116,
+    "2002": 116,
+    "1988": 116,
+    "1985": 116
+  },
+  "source": "User provided Excel table Röstdata v3/röstdata",
+  "missing": "Empty fields remain null; rows for the whole municipality and vote collection districts are not mapped to polygons."
+}
