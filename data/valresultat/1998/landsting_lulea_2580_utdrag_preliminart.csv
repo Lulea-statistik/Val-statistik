@@ -21,38 +21,38 @@ valar,valtyp,kommunkod,kalla_id,tryckt_sida,tabell,radtyp,original_radnummer,val
 1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,19,5:e valkretsen,Lerbäcken,709,36,557,"78,6",547,66,7,34,27,18,273,78,44,visuellt_motlast_s277
 1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,20,5:e valkretsen,Luleå 1,1584,18,1270,"80,2",1245,260,36,58,90,58,483,176,84,visuellt_motlast_s277
 1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,21,5:e valkretsen,Luleå 2,1586,26,1288,"81,2",1256,302,49,85,86,53,448,154,79,visuellt_motlast_s277
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,22,5:e valkretsen,Luleå 3,1811,36,1425,"78,7",1389,335,48,73,60,44,569,180,80,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,23,5:e valkretsen,Luleå 4,1643,27,1311,"79,8",1284,308,59,79,65,40,505,140,88,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,24,5:e valkretsen,Luleå 5,998,21,762,"76,4",748,152,31,36,48,34,284,128,35,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,25,5:e valkretsen,Luleå 6,1473,26,1221,"82,9",1199,181,45,58,43,77,525,190,80,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,26,5:e valkretsen,Luleå 7,1357,59,1081,"79,7",1050,105,27,41,51,48,521,188,69,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,27,5:e valkretsen,Luleå 8,1095,24,908,"82,9",894,139,22,41,39,37,377,162,77,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,28,5:e valkretsen,Luleå 9,1555,47,1246,"80,1",1230,219,24,69,76,38,526,183,95,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,29,5:e valkretsen,Luleå 10,1212,176,720,"59,4",702,84,10,18,50,35,277,161,67,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,30,5:e valkretsen,Luleå 11,841,20,707,"84,1",692,107,13,50,26,28,279,143,46,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,31,5:e valkretsen,Luleå 13,1332,41,1056,"79,3",1032,113,30,42,43,44,467,205,88,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,32,5:e valkretsen,Luleå 14,473,24,368,"77,8",357,42,4,12,12,34,94,126,33,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,33,5:e valkretsen,Luleå 15,1007,67,692,"68,7",679,59,13,13,23,16,307,190,58,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,34,5:e valkretsen,Luleå 16,934,47,655,"70,1",650,31,9,10,18,18,352,156,56,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,35,5:e valkretsen,Luleå 17,678,33,524,"77,3",516,27,13,11,19,16,271,119,40,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,36,5:e valkretsen,Luleå 18,629,21,495,"78,7",488,55,18,20,18,19,217,110,31,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,37,5:e valkretsen,Luleå 19,1477,35,1202,"81,4",1175,158,31,41,53,39,558,212,83,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,38,5:e valkretsen,Luleå 20,967,16,821,"84,9",799,113,36,55,39,40,340,129,47,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,39,5:e valkretsen,Luleå 21,971,16,853,"87,8",837,153,54,79,52,39,321,83,56,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,40,5:e valkretsen,Luleå 22,814,12,732,"89,9",721,106,21,34,35,20,345,113,47,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,41,5:e valkretsen,Melderstein,362,2,288,"79,6",286,37,37,10,20,5,95,32,50,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,42,5:e valkretsen,Måttsund,557,6,490,"88,0",482,90,58,15,19,19,228,34,19,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,43,5:e valkretsen,Niemisel,404,6,287,"71,0",287,27,47,1,10,9,121,33,39,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,44,5:e valkretsen,Persön,1153,15,916,"79,4",898,151,126,34,59,36,316,110,66,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,45,5:e valkretsen,Porsöns 1,1005,103,730,"72,6",706,91,22,33,27,39,262,158,74,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,46,5:e valkretsen,Porsöns 2,1293,119,956,"73,9",908,190,33,67,51,68,283,119,97,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,47,5:e valkretsen,Porsöns 3,1743,42,1459,"83,7",1397,334,79,95,75,85,484,145,100,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,48,5:e valkretsen,Rutvik,707,11,592,"83,7",574,76,64,18,25,21,262,72,36,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,49,5:e valkretsen,Råneå 1,1155,32,900,"77,9",888,107,69,45,31,14,416,127,79,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,50,5:e valkretsen,Råneå 2,818,9,636,"77,8",627,73,66,21,42,10,271,80,64,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,51,5:e valkretsen,Stadsöns 1,1156,19,962,"83,2",942,189,29,55,63,32,388,144,42,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,52,5:e valkretsen,Stadsöns 2,1071,22,843,"78,7",831,115,38,39,70,16,377,130,46,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,53,5:e valkretsen,Stadsöns 3,1041,39,828,"79,5",818,108,33,37,42,15,415,117,51,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,54,5:e valkretsen,Sunderbyns 1,1381,30,1173,"84,9",1152,113,30,53,43,36,600,226,51,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,55,5:e valkretsen,Sunderbyns 2,812,9,645,"79,4",635,91,37,29,35,28,275,88,52,preliminar_bildtranskription
-1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,56,5:e valkretsen,Vitå,422,1,327,"77,5",321,23,39,16,12,4,130,61,36,preliminar_bildtranskription
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,22,5:e valkretsen,Luleå 3,1811,36,1425,"78,7",1389,335,48,73,60,44,569,180,80,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,23,5:e valkretsen,Luleå 4,1643,27,1311,"79,8",1284,308,59,79,65,40,505,140,88,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,24,5:e valkretsen,Luleå 5,998,21,762,"76,4",748,152,31,36,48,34,284,128,35,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,25,5:e valkretsen,Luleå 6,1473,26,1221,"82,9",1199,181,45,58,43,77,525,190,80,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,26,5:e valkretsen,Luleå 7,1357,59,1081,"79,7",1050,105,27,41,51,48,521,188,69,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,27,5:e valkretsen,Luleå 8,1095,24,908,"82,9",894,139,22,41,39,37,377,162,77,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,28,5:e valkretsen,Luleå 9,1555,47,1246,"80,1",1230,219,24,69,76,38,526,183,95,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,29,5:e valkretsen,Luleå 10,1212,176,720,"59,4",702,84,10,18,50,35,277,161,67,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,30,5:e valkretsen,Luleå 11,841,20,707,"84,1",692,107,13,50,26,28,279,143,46,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,31,5:e valkretsen,Luleå 13,1332,41,1056,"79,3",1032,113,30,42,43,44,467,205,88,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,32,5:e valkretsen,Luleå 14,473,24,368,"77,8",357,42,4,12,12,34,94,126,33,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,33,5:e valkretsen,Luleå 15,1007,67,692,"68,7",679,59,13,13,23,16,307,190,58,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,34,5:e valkretsen,Luleå 16,934,47,655,"70,1",650,31,9,10,18,18,352,156,56,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,35,5:e valkretsen,Luleå 17,678,33,524,"77,3",516,27,13,11,19,16,271,119,40,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,36,5:e valkretsen,Luleå 18,629,21,495,"78,7",488,55,18,20,18,19,217,110,31,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,37,5:e valkretsen,Luleå 19,1477,35,1202,"81,4",1175,158,31,41,53,39,558,212,83,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,38,5:e valkretsen,Luleå 20,967,16,821,"84,9",799,113,36,55,39,40,340,129,47,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,39,5:e valkretsen,Luleå 21,971,16,853,"87,8",837,153,54,79,52,39,321,83,56,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,40,5:e valkretsen,Luleå 22,814,12,732,"89,9",721,106,21,34,35,20,345,113,47,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,41,5:e valkretsen,Melderstein,362,2,288,"79,6",286,37,37,10,20,5,95,32,50,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,42,5:e valkretsen,Måttsund,557,6,490,"88,0",482,90,58,15,19,19,228,34,19,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,43,5:e valkretsen,Niemisel,404,6,287,"71,0",287,27,47,1,10,9,121,33,39,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,44,5:e valkretsen,Persön,1153,15,916,"79,4",898,151,126,34,59,36,316,110,66,visuellt_motlast_s277
+1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,45,5:e valkretsen,Porsöns 1,1005,103,730,"72,6",706,91,22,33,27,39,262,158,74,visuellt_motlast_s278
+1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,46,5:e valkretsen,Porsöns 2,1293,119,956,"73,9",908,190,33,67,51,68,283,119,97,visuellt_motlast_s278
+1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,47,5:e valkretsen,Porsöns 3,1743,42,1459,"83,7",1397,334,79,95,75,85,484,145,100,visuellt_motlast_s278
+1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,48,5:e valkretsen,Rutvik,707,11,592,"83,7",574,76,64,18,25,21,262,72,36,visuellt_motlast_s278
+1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,49,5:e valkretsen,Råneå 1,1155,32,900,"77,9",888,107,69,45,31,14,416,127,79,visuellt_motlast_s278
+1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,50,5:e valkretsen,Råneå 2,818,9,636,"77,8",627,73,66,21,42,10,271,80,64,visuellt_motlast_s278
+1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,51,5:e valkretsen,Stadsöns 1,1156,19,962,"83,2",942,189,29,55,63,32,388,144,42,visuellt_motlast_s278
+1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,52,5:e valkretsen,Stadsöns 2,1071,22,843,"78,7",831,115,38,39,70,16,377,130,46,visuellt_motlast_s278
+1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,53,5:e valkretsen,Stadsöns 3,1041,39,828,"79,5",818,108,33,37,42,15,415,117,51,visuellt_motlast_s278
+1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,54,5:e valkretsen,Sunderbyns 1,1381,30,1173,"84,9",1152,113,30,53,43,36,600,226,51,visuellt_motlast_s278
+1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,55,5:e valkretsen,Sunderbyns 2,812,9,645,"79,4",635,91,37,29,35,28,275,88,52,visuellt_motlast_s278
+1998,region,2580,SCB_SOS_1998_D2,278,3,valdistrikt,56,5:e valkretsen,Vitå,422,1,327,"77,5",321,23,39,16,12,4,130,61,36,visuellt_motlast_s278
