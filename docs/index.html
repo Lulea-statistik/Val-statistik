@@ -41,10 +41,12 @@ allBounds=layer.getBounds();map.fitBounds(allBounds,{padding:[20,20]});document.
 selector.addEventListener('change',()=>choose(selector.value));document.getElementById('reset').addEventListener('click',()=>{selector.value='';choose('')});
 }).catch(err=>{document.getElementById('count').textContent='Kunde inte läsa geografiska data: '+err.message});
 const yearControl=document.getElementById('year');
-const vintages={2018:'data/valdistrikt/2018/lulea_2580_valdistrikt_2018_epsg4326.geojson'};
+const vintages={2006:'data/valdistrikt/2006/lulea_2580_valdistrikt_2006_epsg4326.geojson',2010:'data/valdistrikt/2010/lulea_2580_valdistrikt_2010_epsg4326.geojson',2014:'data/valdistrikt/2014/lulea_2580_valdistrikt_2014_epsg4326.geojson',2022:'data/valdistrikt/2022/lulea_2580_valdistrikt_2022_epsg4326.geojson',2026:'data/valdistrikt/2026/lulea_2580_valdistrikt_2026_epsg4326.geojson',2018:'data/valdistrikt/2018/lulea_2580_valdistrikt_2018_epsg4326.geojson'};
 for(const [year,url] of Object.entries(vintages)){
-  fetch(url,{method:'HEAD'}).then(r=>{
-    if(!r.ok)return;
+  fetch(url).then(r=>r.ok?r.json():null).then(data=>{
+    if(!data||!Array.isArray(data.features)||!data.features.length)return;
+    const valid=data.features.every(f=>{const p=f.properties||{};const municipal=String(p.kommunkod??p.Kommunkod??p.KOM??'');const id=String(p.valdistriktskod??p.Valdistriktskod??p.VD??p.Lkfv??p.LKFV??'');return municipal?municipal==='2580':/^2580[0-9]{4}$/.test(id)});
+    if(!valid)return;
     const opt=document.createElement('option');
     opt.value=year;opt.textContent=year;
     yearControl.appendChild(opt);
@@ -58,19 +60,22 @@ yearControl.addEventListener('change',async()=>{
   const response=await fetch(url);if(!response.ok)throw Error('HTTP '+response.status);
   const data=await response.json();
   if(!Array.isArray(data.features)||!data.features.length)throw Error('Inga geometrier');
+  const isLulea=f=>{const p=props(f),municipality=String(p.kommunkod??p.Kommunkod??p.KOM??'').trim();const id=String(p.valdistriktskod??p.Valdistriktskod??p.VD??p.Lkfv??p.LKFV??'');return municipality ? municipality==='2580' : /^2580[0-9]{4}$/.test(id)};
+  data.features=data.features.filter(isLulea);
+  if(!data.features.length)throw Error('Filen saknar verifierbara Luleådistrikt (2580)');
   if(layer)map.removeLayer(layer);
   selector.replaceChildren(new Option('Alla valdistrikt',''));
-  data.features.sort((a,b)=>String(props(a).VD_NAMN||props(a).valdistriktsnamn||'').localeCompare(String(props(b).VD_NAMN||props(b).valdistriktsnamn||''),'sv'));
+  data.features.sort((a,b)=>String(props(a).valdistriktsnamn||props(a).Valdistriktsnamn||props(a).VD_NAMN||props(a).Vdnamn||props(a).VDNAMN||props(a).NAMN||'').localeCompare(String(props(b).valdistriktsnamn||props(b).Valdistriktsnamn||props(b).VD_NAMN||props(b).Vdnamn||props(b).VDNAMN||props(b).NAMN||''),'sv'));
   for(const feature of data.features){
    const opt=document.createElement('option');
-   opt.value=String(props(feature).VD||props(feature).valdistriktskod);
-   opt.textContent=String(props(feature).VD_NAMN||props(feature).valdistriktsnamn)+' ('+opt.value+')';
+   opt.value=String(props(feature).valdistriktskod||props(feature).Valdistriktskod||props(feature).VD||props(feature).Lkfv||props(feature).LKFV||'');
+   opt.textContent=String(props(feature).valdistriktsnamn||props(feature).Valdistriktsnamn||props(feature).VD_NAMN||props(feature).Vdnamn||props(feature).VDNAMN||props(feature).NAMN||'')+' ('+opt.value+')';
    selector.appendChild(opt);
   }
   selected=null;
-  const districtCode=f=>String(props(f).VD||props(f).valdistriktskod);
+  const districtCode=f=>String(props(f).valdistriktskod||props(f).Valdistriktskod||props(f).VD||props(f).Lkfv||props(f).LKFV||'');
   layer=L.geoJSON(data,{style:f=>({color:'#a52635',weight:1.4,fillColor:'#c64650',fillOpacity:.32}),onEachFeature:(f,l)=>{
-    l.bindPopup('<strong>'+String(props(f).VD_NAMN||props(f).valdistriktsnamn)+'</strong><p>Valdistrikt: '+districtCode(f)+'</p><p>Valår: '+year+'</p>');
+    l.bindPopup('<strong>'+String(props(f).valdistriktsnamn||props(f).Valdistriktsnamn||props(f).VD_NAMN||props(f).Vdnamn||props(f).VDNAMN||props(f).NAMN||'')+'</strong><p>Valdistrikt: '+districtCode(f)+'</p><p>Valår: '+year+'</p>');
     l.on('click',()=>{selector.value=districtCode(f);map.fitBounds(l.getBounds());l.openPopup()});
   }}).addTo(map);
   allBounds=layer.getBounds();map.fitBounds(allBounds,{padding:[20,20]});
