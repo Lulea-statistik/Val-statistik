@@ -1,0 +1,7 @@
+valar,valtyp,kommunkod,kalla_id,tryckt_sida,tabell,radtyp,original_radnummer,valkrets,valdistrikt,rostberattigade,utlandska_medborgare,rostande,valdeltagande_procent,giltiga,m,c,fp,kd,mp,s,v,ovr,granskningsstatus
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,1,5:e valkretsen,Avvik,845,7,707,"83,7",692,109,105,44,47,25,257,61,44,preliminar_bildtranskription
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,2,5:e valkretsen,Antnäs,559,6,476,"85,2",469,55,29,22,17,16,241,53,36,preliminar_bildtranskription
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,3,5:e valkretsen,Avan,332,6,278,"83,7",276,37,30,5,24,17,93,38,32,preliminar_bildtranskription
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,4,5:e valkretsen,Bensbyn,561,8,468,"83,4",456,76,23,33,42,20,176,63,23,preliminar_bildtranskription
+1998,region,2580,SCB_SOS_1998_D2,277,3,valdistrikt,5,5:e valkretsen,Bergnäsets 1,591,3,496,"83,9",489,125,17,24,41,29,162,51,40,preliminar_bildtranskription
+1998,region,2580,SCB_SOS_1998_D2,278,3,kommun_summa,1,5:e valkretsen,Hela kommunen,55724,1817,44742,"80,3",43817,6638,2111,2185,2393,1746,18650,6939,3155,kontrolltotal_från_bild
