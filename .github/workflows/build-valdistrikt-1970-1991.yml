@@ -1,0 +1,33 @@
+name: Build provisional district geometries 1970-1991
+on:
+  push:
+    paths:
+      - scripts/build_valdistrikt_1970_1991.py
+      - .github/workflows/build-valdistrikt-1970-1991.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install geometry dependencies
+        run: pip install shapely pyproj
+      - name: Compile reconstruction script
+        run: python -m py_compile scripts/build_valdistrikt_1970_1991.py
+      - name: Generate and validate 1970-1991 polygons
+        run: python scripts/build_valdistrikt_1970_1991.py
+      - name: Publish reconstructed years
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for y in 1970 1973 1976 1979 1982 1985 1988 1991; do
+            git add "docs/data/valdistrikt/$y/"
+          done
+          git diff --cached --quiet && exit 0
+          git commit -m "Publish provisional historical Lulea district geometries 1970-1991"
+          git push
