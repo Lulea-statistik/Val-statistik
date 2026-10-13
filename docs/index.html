@@ -40,4 +40,47 @@ layer=L.geoJSON(data,{style,onEachFeature:(f,l)=>{l.bindPopup('<strong>'+props(f
 allBounds=layer.getBounds();map.fitBounds(allBounds,{padding:[20,20]});document.getElementById('count').textContent=data.features.length+' valdistrikt – 29 Norra och 27 Södra valkretsen';
 selector.addEventListener('change',()=>choose(selector.value));document.getElementById('reset').addEventListener('click',()=>{selector.value='';choose('')});
 }).catch(err=>{document.getElementById('count').textContent='Kunde inte läsa geografiska data: '+err.message});
+const yearControl=document.getElementById('year');
+const vintages={2018:'data/valdistrikt/2018/lulea_2580_valdistrikt_2018_epsg4326.geojson'};
+for(const [year,url] of Object.entries(vintages)){
+  fetch(url,{method:'HEAD'}).then(r=>{
+    if(!r.ok)return;
+    const opt=document.createElement('option');
+    opt.value=year;opt.textContent=year;
+    yearControl.appendChild(opt);
+  }).catch(()=>{});
+}
+yearControl.addEventListener('change',async()=>{
+ const year=yearControl.value;
+ const url=year==='2002'?dataUrl:vintages[year];
+ if(!url)return;
+ try{
+  const response=await fetch(url);if(!response.ok)throw Error('HTTP '+response.status);
+  const data=await response.json();
+  if(!Array.isArray(data.features)||!data.features.length)throw Error('Inga geometrier');
+  if(layer)map.removeLayer(layer);
+  selector.replaceChildren(new Option('Alla valdistrikt',''));
+  data.features.sort((a,b)=>String(props(a).VD_NAMN||props(a).valdistriktsnamn||'').localeCompare(String(props(b).VD_NAMN||props(b).valdistriktsnamn||''),'sv'));
+  for(const feature of data.features){
+   const opt=document.createElement('option');
+   opt.value=String(props(feature).VD||props(feature).valdistriktskod);
+   opt.textContent=String(props(feature).VD_NAMN||props(feature).valdistriktsnamn)+' ('+opt.value+')';
+   selector.appendChild(opt);
+  }
+  selected=null;
+  const districtCode=f=>String(props(f).VD||props(f).valdistriktskod);
+  layer=L.geoJSON(data,{style:f=>({color:'#a52635',weight:1.4,fillColor:'#c64650',fillOpacity:.32}),onEachFeature:(f,l)=>{
+    l.bindPopup('<strong>'+String(props(f).VD_NAMN||props(f).valdistriktsnamn)+'</strong><p>Valdistrikt: '+districtCode(f)+'</p><p>Valår: '+year+'</p>');
+    l.on('click',()=>{selector.value=districtCode(f);map.fitBounds(l.getBounds());l.openPopup()});
+  }}).addTo(map);
+  allBounds=layer.getBounds();map.fitBounds(allBounds,{padding:[20,20]});
+  document.getElementById('count').textContent=data.features.length+' valdistrikt ('+year+')';
+  document.getElementById('selection').textContent=year==='2002'?'Rekonstruerade gränser':'Valmyndighetens originalgeometrier';
+  selector.onchange=()=>{
+    const chosen=selector.value;
+    if(!chosen){map.fitBounds(allBounds);return;}
+    layer.eachLayer(l=>{if(districtCode(l.feature)===chosen){map.fitBounds(l.getBounds());l.openPopup();}});
+  };
+ }catch(e){document.getElementById('count').textContent='Årgången kunde inte laddas: '+e.message;}
+});
 </script></body></html>
