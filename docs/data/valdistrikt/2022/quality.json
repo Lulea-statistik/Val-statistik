@@ -1,0 +1,15 @@
+{
+  "valar": 2022,
+  "kommunkod": "2580",
+  "source_page": "https://www.val.se/valresultat-och-statistik/statistik-och-data/radata-fran-val-2002-2022",
+  "archive_url": "https://www.val.se/download/18.162047b519a91d053311a1f7/1662820377760/valdistrikt-norrbottens-lan.zip",
+  "source_sha256": "71c6d3cd5b6ddc9cfb497005825998bc06600b2f2cfb2f8c069da4b87b54a88b",
+  "source_crs": "EPSG:3006",
+  "target_crs": "EPSG:4326",
+  "feature_count": 49,
+  "geometry_types": [
+    "Polygon"
+  ],
+  "checked_utc": "2026-10-13T11:04:22.139846+00:00",
+  "status": "imported_requires_crossyear_boundary_review"
+}
