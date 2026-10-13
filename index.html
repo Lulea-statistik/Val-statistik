@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Valdistrikt i Luleå 2002 | Val-statistik</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>body{margin:0;font:16px system-ui,sans-serif;color:#172333;background:#f4f6f8}header{padding:16px 24px;background:#fff;border-bottom:1px solid #dce3eb}h1{font-size:1.6rem;margin:0 0 8px}p{margin:4px 0;line-height:1.5}.layout{display:grid;grid-template-columns:minmax(230px,300px) 1fr;min-height:75vh}aside{padding:20px;background:#fff}#map{min-height:75vh}label{display:block;margin:15px 0 6px;font-weight:600}select,button{width:100%;padding:10px;border:1px solid #a8b7c5;border-radius:5px;background:white}button{margin-top:16px;cursor:pointer}.note{font-size:.87rem;color:#4b5a69;margin-top:22px}footer{padding:14px 20px;font-size:.85rem}a{color:#005999}@media(max-width:720px){.layout{display:flex;flex-direction:column}#map{height:62vh;min-height:450px}}</style></head>
+<body><header><h1>Valdistrikt i Luleå</h1><p>Historisk valdistriktskarta – rekonstruktion av indelningen år 2002</p></header>
+<div class="layout"><aside><label for="year">Valår</label><select id="year"><option value="2002">2002</option></select>
+<label for="election">Valtyp</label><select id="election"><option value="riksdag">Riksdagsval</option><option value="region">Landstings-/regionval</option><option value="kommun">Kommunfullmäktigeval</option></select>
+<label for="district">Valdistrikt</label><select id="district"><option value="">Alla valdistrikt</option></select>
+<button id="reset">Visa hela Luleå</button><p id="count"></p><p id="selection"></p>
+<p class="note"><strong>Om kartan:</strong> Gränserna från 2002 är rekonstruerade från officiellt GIS-material från 2006 och jämförda med kartbilder från 2002. De är inte certifierade originalgränser. Valtypsväljaren förbereder framtida valresultat; tills vidare visas samma valdistriktsgränser oavsett valtyp. <a href="docs/valdistrikt-2002-metod.md">Metod</a>.</p></aside><main id="map" aria-label="Karta över Luleås valdistrikt"></main></div>
+<footer>Källa: Valmyndigheten. <a href="https://github.com/Lulea-statistik/Val-statistik">GitHub & metodinformation</a>.</footer>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const map=L.map('map',{preferCanvas:true}).setView([65.59,22.15],10);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);
+const dataUrl='data/valdistrikt/2002/lulea_valdistrikt_2002_reconstructed_epsg4326.geojson';
+let layer,allBounds,selected=null;const selector=document.getElementById('district');
+const props=f=>f.properties||{};const code=f=>String(props(f).valdistriktskod||'');
+function style(f){return {color:code(f)===selected?'#222':'#a52635',weight:code(f)===selected?4:1.5,fillColor:props(f).kommunvalkrets_kod==='01'?'#d5a329':'#c64650',fillOpacity:code(f)===selected?.7:.32};}
+function choose(v){selected=v||null;layer.setStyle(style);if(selected){let found;layer.eachLayer(l=>{if(code(l.feature)===selected)found=l});if(found){map.fitBounds(found.getBounds(),{padding:[25,25]});found.openPopup()}}else map.fitBounds(allBounds,{padding:[20,20]});}
+fetch(dataUrl).then(r=>{if(!r.ok)throw Error('HTTP '+r.status);return r.json()}).then(data=>{
+if(!Array.isArray(data.features)||data.features.length!==56)throw Error('Oväntat antal valdistrikt');
+data.features.sort((a,b)=>(props(a).valdistriktsnamn||'').localeCompare(props(b).valdistriktsnamn||'','sv'));
+for(const f of data.features){const o=document.createElement('option');o.value=code(f);o.textContent=props(f).valdistriktsnamn+' ('+code(f)+')';selector.appendChild(o)}
+layer=L.geoJSON(data,{style,onEachFeature:(f,l)=>{l.bindPopup('<strong>'+props(f).valdistriktsnamn+'</strong><p>Kod: '+code(f)+'</p><p>'+props(f).kommunvalkrets_namn+'</p>');l.on('click',()=>{selector.value=code(f);choose(code(f))})}}).addTo(map);
+allBounds=layer.getBounds();map.fitBounds(allBounds,{padding:[20,20]});document.getElementById('count').textContent=data.features.length+' valdistrikt – 29 Norra och 27 Södra valkretsen';
+selector.addEventListener('change',()=>choose(selector.value));document.getElementById('reset').addEventListener('click',()=>{selector.value='';choose('')});
+}).catch(err=>{document.getElementById('count').textContent='Kunde inte läsa geografiska data: '+err.message});
+</script></body></html>
