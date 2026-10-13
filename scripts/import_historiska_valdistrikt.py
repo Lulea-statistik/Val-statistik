@@ -134,7 +134,8 @@ def run(year,root):
             props["source_part_count"]=len(parts)
             merged.append({"type":"Feature","properties":props,"geometry":mapping(unary_union([shape(x["geometry"]) for x in parts]))})
         matched=merged
-    output=[]\n    for f in matched:
+    output=[]
+    for f in matched:
         g=transform(transformer.transform,shape(f["geometry"]))
         if not g.is_valid:raise RuntimeError("Reprojection resulted in invalid geometry")
         if not (18.0<=g.bounds[0]<=25.0 and 64.0<=g.bounds[1]<=68.0 and 18.0<=g.bounds[2]<=25.0 and 64.0<=g.bounds[3]<=68.0):
