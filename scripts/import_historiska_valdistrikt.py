@@ -37,11 +37,11 @@ def fetch_archive(year,session):
     for a in soup.select("a[href]"):
         label=a.get_text(" ",strip=True).casefold()
         href=a["href"]
-        if any(s in (label+" "+href.casefold()) for s in labels):
+        if any(term in (label+" "+href.casefold()) for term in labels):
             matches.append(urljoin(r.url,href))
     matches=list(dict.fromkeys(matches))
     if len(matches)!=1:
-        raise RuntimeError(f"Expected exactly one matching download for {year}, got {matches}. Inspect source HTML.")
+        raise RuntimeError(f"Expected exactly one matching download for {year}, got {matches}. Inspect source HTML and use a verified source URL.")
     url=matches[0]
     r=session.get(url,timeout=180);r.raise_for_status()
     if not zipfile.is_zipfile(__import__("io").BytesIO(r.content)):
@@ -119,7 +119,7 @@ def run(year,root):
     for f in matched:
         g=transform(transformer.transform,shape(f["geometry"]))
         if not g.is_valid:raise RuntimeError("Reprojection resulted in invalid geometry")
-        if not (-180<=g.bounds[0]<=180 and -90<=g.bounds[1]<=90 and -180<=g.bounds[2]<=180 and -90<=g.bounds[3]<=90):
+        if not (18.0<=g.bounds[0]<=25.0 and 64.0<=g.bounds[1]<=68.0 and 18.0<=g.bounds[2]<=25.0 and 64.0<=g.bounds[3]<=68.0):
             raise RuntimeError("Reprojected coordinates outside WGS84 range")
         props=dict(f["properties"])
         props.update({"valar":year,"kommunkod":"2580","kallstatus":"original_valmyndigheten","original_epsg":crs.to_epsg()})
