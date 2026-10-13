@@ -25,3 +25,11 @@ Original-PDF:s sida 278 (tryckt sida 276) har lästs visuellt på nytt i hög up
 Den uppladdade SCB-originalfilens PDF-sida 279 / tryckta sida 277 renderades på nytt och jämfördes med registrerad CSV. Distrikten **Bergnäsets 3, Björkskatans 1–2, Brändön, Bälinge, Ersnäs, Gammelstad, Hertsöns 1, 3 och 4, Jämtön, Klöverträsk, Lerbäcken, Luleå 1–2** motlästes i samtliga redovisade numeriska kolumner; ingen avvikelse noterades. De 15 CSV-raderna har status `visuellt_motlast_s277`.
 
 Sammanlagt är nu **33 av 56** distrikt motlästa mot originalbilder (6 på s. 276, 15 på s. 277 och 12 på s. 278). Återstår **23** distriktsrader på tryckt s. 277, från Luleå 3 till Persön. Ingen återstående rad får ännu uppgraderas från preliminär transkription endast på grund av godkänd aritmetik.
+
+## Kontrollomgång 5 – färdig motläsning av 56 distriktsrader
+
+Den 13 oktober 2026 kontrollerades återstående **23 distriktsrader på tryckt sida 277** (Luleå 3–11, Luleå 13–22, Melderstein, Måttsund, Niemisel och Persön) mot den uppladdade SCB-sidbilden. De tidigare kontrollerade **12 distriktsraderna på sida 278** fick också radvis granskningsmarkering i CSV. Samtliga 56 distrikt har nu status `visuellt_motlast_s276`, `visuellt_motlast_s277` eller `visuellt_motlast_s278`.
+
+Tidigare summeringskontroll visar 55 724 röstberättigade, 44 438 röstande och 43 527 giltiga distriktsröster, vilket motsvarar kommuntotalen efter separat redovisning av 304 röstande och 290 giltiga poströster som inte ingick i valdistriktens lokala sammanräkning. Partikategoriernas kommunsummor stämmer vid samma avstämning.
+
+**Granskningsnivå:** utförd visuell motläsning samt intern aritmetisk avstämning. Inte oberoende dubbelinmatning av två olika granskare. Automatisk CI-körningsstatus återstår att separat bekräfta. Publicering av original-PDF-utdraget som binärfil på GitHub återstår också.
