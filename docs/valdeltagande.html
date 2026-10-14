@@ -243,7 +243,7 @@ document.getElementById('metric')?.addEventListener('change',repaintVotes);
 document.getElementById('reset').addEventListener('click',()=>{activeDistrictCode=null;districtSelect.value='';map.closePopup();fitMunicipality();repaintVotes()});
 // Add a year only once its GeoJSON has been successfully published and validated.
 yearSelect.replaceChildren(new Option('2002 (rekonstruktion)','2002'));
-for(const year of Object.keys(sources).filter(y=>y!=='2002')){
+for(const year of Object.keys(sources).filter(y=>y!=='2002'&&Number(y)>=1985)){
  fetch(sources[year]).then(r=>r.ok?r.json():null).then(data=>{
   if(!data?.features?.length||!data.features.every(isLulea))return;
   const expected=Number(year)<=1991?55:(year==='1994'||year==='1998'?56:null);
