@@ -6,7 +6,8 @@
 <body><header><nav style="margin-bottom:12px"><a href="index.html">Valdistriktskarta</a> · <a href="valdeltagande.html">Valdeltagande</a> · <a href="ogiltiga-roster.html">Ogiltiga röster</a></nav><h1>Ogiltiga röster i Luleå</h1><p>Historiska valdistriktsgränser för Luleå kommun, 1970–2026</p></header>
 <div class="layout"><aside><label for="year">Valår</label><select id="year"><option value="2002">2002</option></select>
 <label for="election">Valtyp</label><select id="election"><option value="riksdag">Riksdagsval</option><option value="region" disabled>Regionval (saknar röstdata i denna fil)</option><option value="kommun">Kommunfullmäktigeval</option></select>
-<label for="metric">Visa ogiltiga röster</label><select id="metric"><option value="med ogiltiga valsedlar">Samtliga ogiltiga valsedlar</option><option value="OG varav blanka">OG varav blanka</option><option value="OG varav ÖVR ogiltiga">OG varav ÖVR ogiltiga</option><option value="OG varav EGEJ, ej anmälda part.">OG varav EGEJ, ej anmälda partier</option></select><label for="district">Valdistrikt</label><select id="district"><option value="">Alla valdistrikt</option></select>
+<label for="metric">Visa ogiltiga röster</label><select id="metric"><option value="med ogiltiga valsedlar">Samtliga ogiltiga valsedlar</option><option value="OG varav blanka">OG varav blanka</option><option value="OG varav ÖVR ogiltiga">OG varav ÖVR ogiltiga</option><option value="OG varav EGEJ, ej anmälda part.">OG varav EGEJ, ej anmälda partier</option></select><label for="zoomPreset">Zoom</label><select id="zoomPreset"><option value="city">Luleå Stadsbygd</option><option value="municipality">Luleå Kommun</option></select>
+<label for="district">Valdistrikt</label><select id="district"><option value="">Alla valdistrikt</option></select>
 <button id="reset">Visa hela Luleå</button><div id="voteStatus" style="margin-top:16px;font-size:.9rem;font-weight:600">Läser röstdata …</div><div id="voteLegend" style="margin-top:10px;font-size:.82rem"></div><p id="count"></p><p id="selection"></p>
 <p class="note"><strong>Om kartan:</strong> Gränserna 2006–2026 bygger på Valmyndighetens originalgeometrier. År 2002 är rekonstruerat och är inte certifierad originalgeometri. Årgångar kan skilja sig i hur vatten och kustområden avgränsas. Röstdata används för färgsättning när en säker distriktsmatchning finns. Grått betyder saknade eller ej entydigt matchade uppgifter. <a href="valdistrikt-2002-metod.md">Metod 2002</a>. <a href="valdistrikt-1998-1994-rekonstruktion.md">Beslut 2001 och rekonstruktion 1998/1994</a>.</p></aside><main id="map" aria-label="Karta över Luleås valdistrikt"></main></div>
 <footer>Källa: Valmyndigheten. <a href="https://github.com/Lulea-statistik/Val-statistik">GitHub & metodinformation</a>.</footer><section style="padding:20px 24px;max-width:1100px;margin:auto;background:#fff"><h2>Historisk granskning 1970–2026</h2><p>Projektet dokumenterar valdistrikt och valkretsar separat för riksdagsval, landstings-/regionval och kommunfullmäktigeval. <strong>Under arbete:</strong> 51 kombinationer av valår och valtyp finns i arbetsregistret, men källkontroll återstår för flertalet år.</p><p><strong>SCB 1998:</strong> Luleå kommun redovisas i femte landstingsvalkretsen. Kommunens total är 55 724 röstberättigade, 44 742 röstande och 43 817 giltiga valsedlar. För 2002 innehåller kartan två <em>kommunala</em> valkretsar. Dessa är olika valtyper och indelningarna ska inte sammanblandas.</p><p><a href="historisk-valkretsinventering.md">Metod och status</a> · <a href="https://github.com/Lulea-statistik/Val-statistik/blob/main/data/kallor/publikationsinventering_1970_2026.csv">Publikationsinventering (GitHub)</a> · <a href="landstingsval-1998-lulea.md">1998 års landstingsval</a></p></section>
@@ -78,7 +79,9 @@ const rateColor=(n,min,max)=>{
  if(n===null)return '#aeb7c3';
  const t=(max>min)?Math.max(0,Math.min(1,(n-min)/(max-min))):.5;
  // Full green-yellow-red span for the values actually shown, not 0..max.
- const palette=['#078447','#23bb55','#c8db31','#ffcc24','#f47721','#d7191c','#9e0034'];
+ const palette=voteMode==='turnout'
+   ? ['#9e0034','#d7191c','#f47721','#ffcc24','#c8db31','#23bb55','#078447']
+   : ['#078447','#23bb55','#c8db31','#ffcc24','#f47721','#d7191c','#9e0034'];
  return palette[Math.min(palette.length-1,Math.floor(t*palette.length))];
 };
 const printable=r=>{
@@ -123,7 +126,9 @@ function repaintVotes(){
  });
  const status=document.getElementById('voteStatus'),legend=document.getElementById('voteLegend');
  status.textContent=voteReady?minmax.length+' av '+(currentLayer.getLayers().length)+' distrikt med matchade värden':'Röstdatafilen saknas på GitHub – ladda upp data/import/rostdata_v3.csv. Kartan går att navigera men statistikfärger saknas.';
- legend.textContent='Dynamisk färgskala: grön = '+nf.format(min)+' %, röd = '+nf.format(max)+' %. Grå = saknas.';
+ legend.textContent=voteMode==='turnout'
+  ? 'Dynamisk färgskala: mörkrött = '+nf.format(min)+' % (lägst), grönt = '+nf.format(max)+' % (högst). Grått = saknas.'
+  : 'Dynamisk färgskala: grönt = '+nf.format(min)+' % (lägst), mörkrött = '+nf.format(max)+' % (högst). Grått = saknas.';
 }
 fetch(voteDataUrl).then(r=>{if(!r.ok)throw Error('missing');return r.json()}).then(data=>{
  voteRows=data.rows||[];voteReady=true;repaintVotes();
@@ -132,6 +137,23 @@ fetch(voteDataUrl).then(r=>{if(!r.ok)throw Error('missing');return r.json()}).th
 const yearSelect=document.getElementById('year'),districtSelect=document.getElementById('district');
 const countEl=document.getElementById('count'),statusEl=document.getElementById('selection');
 let currentLayer=null,currentBounds=null,municipalityLayer=null,municipalityBounds=null,loadedYear=null,loadSequence=0;
+const zoomPresetEl=document.getElementById('zoomPreset');
+const STADSBYGD_CENTER=[65.585,22.17],STADSBYGD_ZOOM=11;
+function fitStadsbygd(){
+ map.setView(STADSBYGD_CENTER,STADSBYGD_ZOOM,{animate:true});
+}
+function fitPreset(){
+ if(zoomPresetEl.value==='municipality')fitMunicipality();
+ else fitStadsbygd();
+}
+zoomPresetEl.addEventListener('change',()=>{
+ activeDistrictCode=null;
+ districtSelect.value='';
+ map.closePopup();
+ fitPreset();
+ repaintVotes();
+});
+
 function fitMunicipality(){
  const bounds=municipalityBounds||currentBounds;
  if(bounds?.isValid())map.fitBounds(bounds,{padding:[28,28],maxZoom:11});
@@ -144,7 +166,7 @@ fetch('data/lulea_kommungrans_2580.geojson').then(r=>{
  municipalityLayer=L.geoJSON(geo,{style:{color:'#243b53',weight:2.6,fill:false,opacity:.88},interactive:false}).addTo(map);
  municipalityBounds=municipalityLayer.getBounds();
  municipalityLayer.bringToFront();
- fitMunicipality();
+ fitPreset();
 }).catch(err=>{console.warn('Kommungränsen kunde inte läsas:',err)});
 
 const p=f=>f.properties||{};
@@ -172,7 +194,7 @@ function chooseDistrict(code){
    map.flyTo(center,targetZoom,{animate:true,duration:0.55});
    match.openPopup();
  }
- else {map.closePopup();fitMunicipality()}
+ else {map.closePopup();fitPreset()}
 }
 async function readYear(year){
  const response=await fetch(sources[year]);
@@ -200,7 +222,7 @@ async function loadYear(year){
      l.on('click',()=>{
        const code=districtCode(feature);
        if(activeDistrictCode===code){
-         activeDistrictCode=null;districtSelect.value='';map.closePopup();fitMunicipality();repaintVotes();
+         activeDistrictCode=null;districtSelect.value='';map.closePopup();fitPreset();repaintVotes();
        }else{
          activeDistrictCode=code;districtSelect.value=code;chooseDistrict(code);repaintVotes();
        }
@@ -239,4 +261,5 @@ for(const year of Object.keys(sources).filter(y=>y!=='2002')){
 }
 yearSelect.addEventListener('change',()=>loadYear(yearSelect.value));
 loadYear('2002');
+fitStadsbygd();
 </script></body></html>
