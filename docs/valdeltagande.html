@@ -138,20 +138,14 @@ const yearSelect=document.getElementById('year'),districtSelect=document.getElem
 const countEl=document.getElementById('count'),statusEl=document.getElementById('selection');
 let currentLayer=null,currentBounds=null,municipalityLayer=null,municipalityBounds=null,loadedYear=null,loadSequence=0;
 const zoomPresetEl=document.getElementById('zoomPreset');
+const ZOOM_KEY='lulea-valstatistik-zoom';
 const STADSBYGD_CENTER=[65.585,22.17],STADSBYGD_ZOOM=11;
-function fitStadsbygd(){
- map.setView(STADSBYGD_CENTER,STADSBYGD_ZOOM,{animate:true});
-}
-function fitPreset(){
- if(zoomPresetEl.value==='municipality')fitMunicipality();
- else fitStadsbygd();
-}
+try{const saved=localStorage.getItem(ZOOM_KEY);if(saved==='city'||saved==='municipality')zoomPresetEl.value=saved;}catch(e){}
+function fitStadsbygd(){map.setView(STADSBYGD_CENTER,STADSBYGD_ZOOM,{animate:true});}
+function fitPreset(){if(zoomPresetEl.value==='municipality')fitMunicipality();else fitStadsbygd();}
 zoomPresetEl.addEventListener('change',()=>{
- activeDistrictCode=null;
- districtSelect.value='';
- map.closePopup();
- fitPreset();
- repaintVotes();
+ try{localStorage.setItem(ZOOM_KEY,zoomPresetEl.value);}catch(e){}
+ activeDistrictCode=null;districtSelect.value='';map.closePopup();fitPreset();repaintVotes();
 });
 
 function fitMunicipality(){
