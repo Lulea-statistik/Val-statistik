@@ -6,6 +6,7 @@
 <body><header><nav style="margin-bottom:12px"><a href="index.html">Valdistriktskarta</a> · <a href="valdeltagande.html">Valdeltagande</a> · <a href="ogiltiga-roster.html">Ogiltiga röster</a></nav><h1>Valdistrikt i Luleå</h1><p>Historiska valdistriktsgränser för Luleå kommun, 1970–2026</p></header>
 <div class="layout"><aside><label for="year">Valår</label><select id="year"><option value="2002">2002</option></select>
 <label for="election">Valtyp</label><select id="election"><option value="riksdag">Riksdagsval</option><option value="region">Landstings-/regionval</option><option value="kommun">Kommunfullmäktigeval</option></select>
+<label for="zoomPreset">Zoom</label><select id="zoomPreset"><option value="city">Luleå Stadsbygd</option><option value="municipality">Luleå Kommun</option></select>
 <label for="district">Valdistrikt</label><select id="district"><option value="">Alla valdistrikt</option></select>
 <button id="reset">Visa hela Luleå</button><p id="count"></p><p id="selection"></p>
 <p class="note"><strong>Om kartan:</strong> Gränserna 2006–2026 bygger på Valmyndighetens originalgeometrier. År 2002 är rekonstruerat och är inte certifierad originalgeometri. Årgångar kan skilja sig i hur vatten och kustområden avgränsas. Valtypsväljaren förbereder framtida valresultat; tills vidare visas samma valdistriktsgränser oavsett valtyp. <a href="valdistrikt-2002-metod.md">Metod 2002</a>. <a href="valdistrikt-1998-1994-rekonstruktion.md">Beslut 2001 och rekonstruktion 1998/1994</a>.</p></aside><main id="map" aria-label="Karta över Luleås valdistrikt"></main></div>
@@ -49,6 +50,17 @@ const sources={
 const yearSelect=document.getElementById('year'),districtSelect=document.getElementById('district');
 const countEl=document.getElementById('count'),statusEl=document.getElementById('selection');
 let currentLayer=null,currentBounds=null,municipalityLayer=null,municipalityBounds=null,loadedYear=null,loadSequence=0;
+const zoomPresetEl=document.getElementById('zoomPreset');
+const ZOOM_KEY='lulea-valstatistik-zoom';
+const STADSBYGD_CENTER=[65.585,22.17],STADSBYGD_ZOOM=11;
+try{const saved=localStorage.getItem(ZOOM_KEY);if(saved==='city'||saved==='municipality')zoomPresetEl.value=saved;}catch(e){}
+function fitStadsbygd(){map.setView(STADSBYGD_CENTER,STADSBYGD_ZOOM,{animate:true});}
+function fitPreset(){if(zoomPresetEl.value==='municipality')fitMunicipality();else fitStadsbygd();}
+zoomPresetEl.addEventListener('change',()=>{
+ try{localStorage.setItem(ZOOM_KEY,zoomPresetEl.value);}catch(e){}
+ districtSelect.value='';map.closePopup();fitPreset();
+});
+
 function fitMunicipality(){
  const bounds=municipalityBounds||currentBounds;
  if(bounds?.isValid())map.fitBounds(bounds,{padding:[28,28],maxZoom:11});
@@ -61,7 +73,7 @@ fetch('data/lulea_kommungrans_2580.geojson').then(r=>{
  municipalityLayer=L.geoJSON(geo,{style:{color:'#243b53',weight:2.6,fill:false,opacity:.88},interactive:false}).addTo(map);
  municipalityBounds=municipalityLayer.getBounds();
  municipalityLayer.bringToFront();
- fitMunicipality();
+ fitPreset();
 }).catch(err=>{console.warn('Kommungränsen kunde inte läsas:',err)});
 
 const p=f=>f.properties||{};
@@ -89,7 +101,7 @@ function chooseDistrict(code){
    map.flyTo(center,targetZoom,{animate:true,duration:0.55});
    match.openPopup();
  }
- else {map.closePopup();fitMunicipality()}
+ else {map.closePopup();fitPreset()}
 }
 async function readYear(year){
  const response=await fetch(sources[year]);
@@ -130,7 +142,7 @@ async function loadYear(year){
  }catch(e){if(requestId===loadSequence){countEl.textContent='Kunde inte läsa '+year+': '+e.message;yearSelect.value=loadedYear||'2002'}}
 }
 districtSelect.addEventListener('change',()=>chooseDistrict(districtSelect.value));
-document.getElementById('reset').addEventListener('click',()=>{districtSelect.value='';chooseDistrict('');fitMunicipality()});
+document.getElementById('reset').addEventListener('click',()=>{districtSelect.value='';chooseDistrict('');fitPreset()});
 // Add a year only once its GeoJSON has been successfully published and validated.
 yearSelect.replaceChildren(new Option('2002 (rekonstruktion)','2002'));
 for(const year of Object.keys(sources).filter(y=>y!=='2002')){
@@ -145,4 +157,5 @@ for(const year of Object.keys(sources).filter(y=>y!=='2002')){
 }
 yearSelect.addEventListener('change',()=>loadYear(yearSelect.value));
 loadYear('2002');
+if(zoomPresetEl.value==='city')fitStadsbygd();
 </script></body></html>
